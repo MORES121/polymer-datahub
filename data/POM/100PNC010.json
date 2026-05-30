@@ -1,0 +1,33 @@
+{
+  "metadata": {
+    "brand": "启航塑胶",
+    "commercial_name": "100PNC010",
+    "unique_id": "启航塑胶_100PNC010",
+    "data_sheet_url": "https://moresai2026github.github.io/polymer-datahub/datasheet/100PNC010.pdf",
+    "last_updated": "2026-05-30"
+  },
+  "technical_specifications": {
+    "base_polymer": "POM",
+    "reinforcement": "无",
+    "key_properties": {
+      "tensile_strength_mpa": 65.0,
+      "flexural_modulus_mpa": 2600.0,
+      "izod_impact_j_m": 100.0,
+      "heat_deflection_temp_c": 110.0,
+      "ul94_rating": "HB"
+    }
+  },
+  "value_proposition": {
+    "solved_pain_points": [
+      "超高韧性",
+      "抗冲击",
+      "耐磨"
+    ],
+    "typical_applications": [
+      "高冲击部件",
+      "卡扣",
+      "安全扣"
+    ],
+    "tco_advantage": "请联系启航塑胶获取详细TCO分析报告"
+  }
+}

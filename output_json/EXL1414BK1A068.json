@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "brand": "启航塑胶",
+    "commercial_name": "EXL1414BK1A068",
+    "unique_id": "启航塑胶_EXL1414BK1A068",
+    "data_sheet_url": "https://moresai2026github.github.io/polymer-datahub/datasheet/EXL1414BK1A068.pdf",
+    "last_updated": "2026-05-30"
+  },
+  "technical_specifications": {
+    "base_polymer": "PC",
+    "reinforcement": "无",
+    "key_properties": {
+      "tensile_strength_mpa": 60.0,
+      "flexural_modulus_mpa": 2100.0,
+      "izod_impact_j_m": 900.0,
+      "heat_deflection_temp_c": 125.0,
+      "ul94_rating": "V2"
+    }
+  },
+  "value_proposition": {
+    "solved_pain_points": [
+      "超高韧性",
+      "耐低温",
+      "黑色"
+    ],
+    "typical_applications": [
+      "手机外壳",
+      "抗冲击部件"
+    ],
+    "tco_advantage": "请联系启航塑胶获取详细TCO分析报告"
+  }
+}

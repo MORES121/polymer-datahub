@@ -1,0 +1,33 @@
+{
+  "metadata": {
+    "brand": "启航塑胶",
+    "commercial_name": "L-1250Y",
+    "unique_id": "启航塑胶_L_1250Y",
+    "data_sheet_url": "https://moresai2026github.github.io/polymer-datahub/datasheet/L-1250Y.pdf",
+    "last_updated": "2026-05-30"
+  },
+  "technical_specifications": {
+    "base_polymer": "PC",
+    "reinforcement": "无",
+    "key_properties": {
+      "tensile_strength_mpa": 68.0,
+      "flexural_modulus_mpa": 2400.0,
+      "izod_impact_j_m": 800.0,
+      "heat_deflection_temp_c": 135.0,
+      "ul94_rating": "V2"
+    }
+  },
+  "value_proposition": {
+    "solved_pain_points": [
+      "光学级",
+      "高透明89%",
+      "低应力"
+    ],
+    "typical_applications": [
+      "光学透镜",
+      "车灯",
+      "医疗器械"
+    ],
+    "tco_advantage": "请联系启航塑胶获取详细TCO分析报告"
+  }
+}

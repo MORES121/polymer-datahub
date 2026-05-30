@@ -1,0 +1,33 @@
+{
+  "metadata": {
+    "brand": "启航塑胶",
+    "commercial_name": "V040",
+    "unique_id": "启航塑胶_V040",
+    "data_sheet_url": "https://moresai2026github.github.io/polymer-datahub/datasheet/V040.pdf",
+    "last_updated": "2026-05-30"
+  },
+  "technical_specifications": {
+    "base_polymer": "PMMA",
+    "reinforcement": "无",
+    "key_properties": {
+      "tensile_strength_mpa": 65.0,
+      "flexural_modulus_mpa": 2800.0,
+      "izod_impact_j_m": 60.0,
+      "heat_deflection_temp_c": 90.0,
+      "ul94_rating": "HB"
+    }
+  },
+  "value_proposition": {
+    "solved_pain_points": [
+      "耐冲击",
+      "高韧性",
+      "抗开裂"
+    ],
+    "typical_applications": [
+      "户外标牌",
+      "展示架",
+      "照明灯具"
+    ],
+    "tco_advantage": "请联系启航塑胶获取详细TCO分析报告"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "brand": "启航塑胶",
+    "commercial_name": "8N",
+    "unique_id": "启航塑胶_8N",
+    "data_sheet_url": "https://moresai2026github.github.io/polymer-datahub/datasheet/8N.pdf",
+    "last_updated": "2026-05-30"
+  },
+  "technical_specifications": {
+    "base_polymer": "PMMA",
+    "reinforcement": "无",
+    "key_properties": {
+      "tensile_strength_mpa": 72.0,
+      "flexural_modulus_mpa": 3200.0,
+      "izod_impact_j_m": 45.0,
+      "heat_deflection_temp_c": 100.0,
+      "ul94_rating": "HB"
+    }
+  },
+  "value_proposition": {
+    "solved_pain_points": [
+      "光学级",
+      "高透明92%",
+      "耐候性好"
+    ],
+    "typical_applications": [
+      "光学透镜",
+      "导光板",
+      "医疗器械",
+      "显示屏"
+    ],
+    "tco_advantage": "请联系启航塑胶获取详细TCO分析报告"
+  }
+}

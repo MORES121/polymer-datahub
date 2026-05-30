@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "brand": "启航塑胶",
+    "commercial_name": "945-701",
+    "unique_id": "启航塑胶_945_701",
+    "data_sheet_url": "https://moresai2026github.github.io/polymer-datahub/datasheet/945-701.pdf",
+    "last_updated": "2026-05-30"
+  },
+  "technical_specifications": {
+    "base_polymer": "PC",
+    "reinforcement": "无",
+    "key_properties": {
+      "tensile_strength_mpa": 62.0,
+      "flexural_modulus_mpa": 2200.0,
+      "izod_impact_j_m": 700.0,
+      "heat_deflection_temp_c": 130.0,
+      "ul94_rating": "V0"
+    }
+  },
+  "value_proposition": {
+    "solved_pain_points": [
+      "阻燃V0",
+      "高透明"
+    ],
+    "typical_applications": [
+      "电子电器外壳",
+      "充电器"
+    ],
+    "tco_advantage": "请联系启航塑胶获取详细TCO分析报告"
+  }
+}

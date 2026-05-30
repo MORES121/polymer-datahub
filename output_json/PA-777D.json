@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "brand": "启航塑胶",
+    "commercial_name": "PA-777D",
+    "unique_id": "启航塑胶_PA_777D",
+    "data_sheet_url": "https://moresai2026github.github.io/polymer-datahub/datasheet/PA-777D.pdf",
+    "last_updated": "2026-05-30"
+  },
+  "technical_specifications": {
+    "base_polymer": "ABS",
+    "reinforcement": "无",
+    "key_properties": {
+      "tensile_strength_mpa": 48.0,
+      "flexural_modulus_mpa": 2400.0,
+      "izod_impact_j_m": 280.0,
+      "heat_deflection_temp_c": 105.0,
+      "ul94_rating": "HB"
+    }
+  },
+  "value_proposition": {
+    "solved_pain_points": [
+      "高耐热",
+      "尺寸稳定"
+    ],
+    "typical_applications": [
+      "汽车内饰高温区域",
+      "电子电器"
+    ],
+    "tco_advantage": "请联系启航塑胶获取详细TCO分析报告"
+  }
+}

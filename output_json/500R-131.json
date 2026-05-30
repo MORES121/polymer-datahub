@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "brand": "启航塑胶",
+    "commercial_name": "500R-131",
+    "unique_id": "启航塑胶_500R_131",
+    "data_sheet_url": "https://moresai2026github.github.io/polymer-datahub/datasheet/500R-131.pdf",
+    "last_updated": "2026-05-30"
+  },
+  "technical_specifications": {
+    "base_polymer": "PC",
+    "reinforcement": "10% Glass Fiber",
+    "key_properties": {
+      "tensile_strength_mpa": 75.0,
+      "flexural_modulus_mpa": 3800.0,
+      "izod_impact_j_m": 150.0,
+      "heat_deflection_temp_c": 138.0,
+      "ul94_rating": "V0"
+    }
+  },
+  "value_proposition": {
+    "solved_pain_points": [
+      "玻纤增强",
+      "高刚性",
+      "阻燃"
+    ],
+    "typical_applications": [
+      "结构件",
+      "电子电器支架"
+    ],
+    "tco_advantage": "请联系启航塑胶获取详细TCO分析报告"
+  }
+}

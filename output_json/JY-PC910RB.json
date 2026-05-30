@@ -1,0 +1,33 @@
+{
+  "metadata": {
+    "brand": "启航塑胶",
+    "commercial_name": "JY-PC910RB",
+    "unique_id": "启航塑胶_JY_PC910RB",
+    "data_sheet_url": "https://moresai2026github.github.io/polymer-datahub/datasheet/JY-PC910RB.pdf",
+    "last_updated": "2026-05-30"
+  },
+  "technical_specifications": {
+    "base_polymer": "PC",
+    "reinforcement": "无",
+    "key_properties": {
+      "tensile_strength_mpa": 65.0,
+      "flexural_modulus_mpa": 2300.0,
+      "izod_impact_j_m": 750.0,
+      "heat_deflection_temp_c": 130.0,
+      "ul94_rating": "V2"
+    }
+  },
+  "value_proposition": {
+    "solved_pain_points": [
+      "高透明",
+      "抗冲击",
+      "耐热"
+    ],
+    "typical_applications": [
+      "电子外壳",
+      "车灯透镜",
+      "防护罩"
+    ],
+    "tco_advantage": "请联系启航塑胶获取详细TCO分析报告"
+  }
+}

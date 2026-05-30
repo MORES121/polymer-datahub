@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "brand": "启航塑胶",
+    "commercial_name": "VH5000",
+    "unique_id": "启航塑胶_VH5000",
+    "data_sheet_url": "https://moresai2026github.github.io/polymer-datahub/datasheet/VH5000.pdf",
+    "last_updated": "2026-05-30"
+  },
+  "technical_specifications": {
+    "base_polymer": "PMMA",
+    "reinforcement": "无",
+    "key_properties": {
+      "tensile_strength_mpa": 78.0,
+      "flexural_modulus_mpa": 3500.0,
+      "izod_impact_j_m": 30.0,
+      "heat_deflection_temp_c": 105.0,
+      "ul94_rating": "HB"
+    }
+  },
+  "value_proposition": {
+    "solved_pain_points": [
+      "高硬度",
+      "耐磨",
+      "表面光泽好"
+    ],
+    "typical_applications": [
+      "高耐磨部件",
+      "光学镜头"
+    ],
+    "tco_advantage": "请联系启航塑胶获取详细TCO分析报告"
+  }
+}

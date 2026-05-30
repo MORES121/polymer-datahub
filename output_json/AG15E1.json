@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "brand": "启航塑胶",
+    "commercial_name": "AG15E1",
+    "unique_id": "启航塑胶_AG15E1",
+    "data_sheet_url": "https://moresai2026github.github.io/polymer-datahub/datasheet/AG15E1.pdf",
+    "last_updated": "2026-05-30"
+  },
+  "technical_specifications": {
+    "base_polymer": "ABS",
+    "reinforcement": "无",
+    "key_properties": {
+      "tensile_strength_mpa": 45.0,
+      "flexural_modulus_mpa": 2200.0,
+      "izod_impact_j_m": 300.0,
+      "heat_deflection_temp_c": 90.0,
+      "ul94_rating": "HB"
+    }
+  },
+  "value_proposition": {
+    "solved_pain_points": [
+      "高刚性",
+      "良好的表面光泽",
+      "易加工"
+    ],
+    "typical_applications": [
+      "汽车内饰件",
+      "家电外壳",
+      "玩具",
+      "日用品"
+    ],
+    "tco_advantage": "请联系启航塑胶获取详细TCO分析报告"
+  }
+}

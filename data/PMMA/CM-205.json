@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "brand": "启航塑胶",
+    "commercial_name": "CM-205",
+    "unique_id": "启航塑胶_CM_205",
+    "data_sheet_url": "https://moresai2026github.github.io/polymer-datahub/datasheet/CM-205.pdf",
+    "last_updated": "2026-05-30"
+  },
+  "technical_specifications": {
+    "base_polymer": "PMMA",
+    "reinforcement": "无",
+    "key_properties": {
+      "tensile_strength_mpa": 70.0,
+      "flexural_modulus_mpa": 3100.0,
+      "izod_impact_j_m": 40.0,
+      "heat_deflection_temp_c": 95.0,
+      "ul94_rating": "HB"
+    }
+  },
+  "value_proposition": {
+    "solved_pain_points": [
+      "高透明度",
+      "耐候性好",
+      "表面硬度高"
+    ],
+    "typical_applications": [
+      "光学透镜",
+      "导光板",
+      "展示架",
+      "标牌"
+    ],
+    "tco_advantage": "请联系启航塑胶获取详细TCO分析报告"
+  }
+}
