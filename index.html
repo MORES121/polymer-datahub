@@ -11,652 +11,119 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #0a1628;
-            color: #ffffff;
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-        }
-        
-        /* 自定义滚动条 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0a1628; color: #ffffff; scroll-behavior: smooth; overflow-x: hidden; }
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
         ::-webkit-scrollbar-thumb { background: #FFD700; border-radius: 10px; }
         
-        /* 视频背景区域 - 带动画 */
-        .hero-section {
-            position: relative;
-            height: 100vh;
-            min-height: 700px;
-            overflow: hidden;
-        }
-        
-        .hero-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 0;
-            animation: scaleVideo 20s ease-in-out infinite alternate;
-        }
-        
-        @keyframes scaleVideo {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.05); }
-        }
-        
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(10,22,40,0.85) 0%, rgba(7,54,66,0.7) 100%);
-            z-index: 1;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-            animation: fadeInUp 1.2s ease-out;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .hero-logo {
-            font-size: 64px;
-            font-weight: 800;
-            letter-spacing: 6px;
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 20px;
-            animation: pulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; text-shadow: 0 0 20px rgba(255,215,0,0.3); }
-            50% { opacity: 0.95; text-shadow: 0 0 40px rgba(255,215,0,0.6); }
-        }
-        
-        .hero-tagline {
-            font-size: 16px;
-            letter-spacing: 8px;
-            opacity: 0.9;
-            margin-bottom: 20px;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
-        }
-        
-        .hero-title {
-            font-size: 52px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            max-width: 800px;
-            animation: fadeInUp 0.8s ease-out 0.4s both;
-        }
-        
-        .hero-desc {
-            font-size: 18px;
-            opacity: 0.85;
-            max-width: 600px;
-            margin-bottom: 35px;
-            animation: fadeInUp 0.8s ease-out 0.6s both;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 25px;
-            flex-wrap: wrap;
-            justify-content: center;
-            animation: fadeInUp 0.8s ease-out 0.8s both;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-            color: #0a1628;
-            padding: 14px 38px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(255,215,0,0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-        }
-        
+        .hero-section { position: relative; height: 100vh; min-height: 700px; overflow: hidden; }
+        .hero-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; animation: scaleVideo 20s ease-in-out infinite alternate; }
+        @keyframes scaleVideo { 0% { transform: scale(1); } 100% { transform: scale(1.05); } }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(10,22,40,0.85) 0%, rgba(7,54,66,0.7) 100%); z-index: 1; }
+        .hero-content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; animation: fadeInUp 1.2s ease-out; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+        .hero-logo { font-size: 64px; font-weight: 800; letter-spacing: 6px; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 20px; animation: pulse 2s ease-in-out infinite; }
+        @keyframes pulse { 0%,100% { opacity: 1; text-shadow: 0 0 20px rgba(255,215,0,0.3); } 50% { opacity: 0.95; text-shadow: 0 0 40px rgba(255,215,0,0.6); } }
+        .hero-tagline { font-size: 16px; letter-spacing: 8px; opacity: 0.9; margin-bottom: 20px; animation: fadeInUp 0.8s ease-out 0.2s both; }
+        .hero-title { font-size: 52px; font-weight: 700; margin-bottom: 20px; max-width: 800px; animation: fadeInUp 0.8s ease-out 0.4s both; }
+        .hero-desc { font-size: 18px; opacity: 0.85; max-width: 600px; margin-bottom: 35px; animation: fadeInUp 0.8s ease-out 0.6s both; }
+        .hero-buttons { display: flex; gap: 25px; flex-wrap: wrap; justify-content: center; animation: fadeInUp 0.8s ease-out 0.8s both; }
+        .btn-primary { background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #0a1628; padding: 14px 38px; border-radius: 50px; text-decoration: none; font-weight: 700; transition: all 0.3s; box-shadow: 0 4px 15px rgba(255,215,0,0.3); position: relative; overflow: hidden; }
+        .btn-primary::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); transition: left 0.5s; }
         .btn-primary:hover::before { left: 100%; }
         .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255,215,0,0.4); }
+        .btn-outline { border: 2px solid #FFD700; color: #FFD700; padding: 12px 35px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s; }
+        .btn-outline:hover { background: rgba(255,215,0,0.1); transform: translateY(-3px); box-shadow: 0 5px 20px rgba(255,215,0,0.2); }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
         
-        .btn-outline {
-            border: 2px solid #FFD700;
-            color: #FFD700;
-            padding: 12px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
+        .navbar { background: rgba(10,22,40,0.95); backdrop-filter: blur(15px); border-radius: 60px; padding: 12px 30px; margin-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; position: relative; z-index: 100; border: 1px solid rgba(255,215,0,0.2); transition: all 0.3s; }
+        .navbar-scrolled { position: fixed; top: 0; left: 0; right: 0; margin: 0; border-radius: 0; background: rgba(10,22,40,0.98); padding: 12px 40px; box-shadow: 0 5px 30px rgba(0,0,0,0.3); }
+        .logo h1 { font-size: 24px; letter-spacing: 2px; font-weight: 700; }
+        .logo h1 a { color: #FFD700; text-decoration: none; transition: all 0.3s; }
+        .logo .logo-sub { font-size: 10px; letter-spacing: 3px; opacity: 0.7; margin-top: 4px; color: white; }
+        .nav-links { display: flex; gap: 5px; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: rgba(255,255,255,0.85); font-size: 14px; font-weight: 500; padding: 8px 20px; border-radius: 40px; transition: all 0.3s; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0; height: 2px; background: #FFD700; transition: width 0.3s; }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 30px; }
+        .nav-links a:hover, .nav-links a.active { background: rgba(255,215,0,0.1); color: #FFD700; }
         
-        .btn-outline:hover {
-            background: rgba(255,215,0,0.1);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(255,215,0,0.2);
-        }
-        
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* 导航栏 - 玻璃效果 + 滚动动画 */
-        .navbar {
-            background: rgba(10,22,40,0.95);
-            backdrop-filter: blur(15px);
-            border-radius: 60px;
-            padding: 12px 30px;
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            position: relative;
-            z-index: 100;
-            border: 1px solid rgba(255,215,0,0.2);
-            transition: all 0.3s;
-        }
-        
-        .navbar-scrolled {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            margin: 0;
-            border-radius: 0;
-            background: rgba(10,22,40,0.98);
-            padding: 12px 40px;
-            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
-        }
-        
-        .logo h1 {
-            font-size: 24px;
-            letter-spacing: 2px;
-            font-weight: 700;
-        }
-        
-        .logo h1 a {
-            color: #FFD700;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-        
-        .logo h1 a:hover { text-shadow: 0 0 10px rgba(255,215,0,0.5); }
-        
-        .logo .logo-sub {
-            font-size: 10px;
-            letter-spacing: 3px;
-            opacity: 0.7;
-            margin-top: 4px;
-            color: white;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 5px;
-            flex-wrap: wrap;
-        }
-        
-        .nav-links a {
-            text-decoration: none;
-            color: rgba(255,255,255,0.85);
-            font-size: 14px;
-            font-weight: 500;
-            padding: 8px 20px;
-            border-radius: 40px;
-            transition: all 0.3s;
-            position: relative;
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background: #FFD700;
-            transition: width 0.3s;
-        }
-        
-        .nav-links a:hover::after,
-        .nav-links a.active::after {
-            width: 30px;
-        }
-        
-        .nav-links a:hover,
-        .nav-links a.active {
-            background: rgba(255,215,0,0.1);
-            color: #FFD700;
-        }
-        
-        /* 卡片通用样式 + 滚动动画 */
-        .card-animate {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease-out;
-        }
-        
-        .card-animate.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-        
+        .card-animate { opacity: 0; transform: translateY(30px); transition: all 0.6s ease-out; }
+        .card-animate.visible { opacity: 1; transform: translateY(0); }
+        .section-title { text-align: center; font-size: 36px; font-weight: 700; margin-bottom: 15px; }
         .section-title span { color: #FFD700; }
         
-        .section-subtitle {
-            text-align: center;
-            font-size: 16px;
-            opacity: 0.7;
-            margin-bottom: 50px;
-        }
-        
-        /* 公司简介卡片 */
-        .about-card {
-            background: linear-gradient(135deg, rgba(13,71,161,0.4) 0%, rgba(21,101,192,0.3) 100%);
-            backdrop-filter: blur(10px);
-            border-radius: 28px;
-            padding: 45px 40px;
-            margin-bottom: 40px;
-            border: 1px solid rgba(255,215,0,0.2);
-            transition: all 0.3s;
-        }
-        
-        .about-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255,215,0,0.4);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-        
+        .about-card { background: linear-gradient(135deg, rgba(13,71,161,0.4) 0%, rgba(21,101,192,0.3) 100%); backdrop-filter: blur(10px); border-radius: 28px; padding: 45px 40px; margin-bottom: 40px; border: 1px solid rgba(255,215,0,0.2); transition: all 0.3s; }
+        .about-card:hover { transform: translateY(-5px); border-color: rgba(255,215,0,0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
         .about-card h2 { font-size: 28px; margin-bottom: 20px; }
         .about-card .en-title { font-size: 12px; color: #FFD700; letter-spacing: 3px; margin-bottom: 15px; }
         .about-card p { line-height: 1.9; opacity: 0.9; margin-bottom: 30px; }
+        .about-stats { display: flex; gap: 25px; flex-wrap: wrap; }
+        .about-stats .stat { background: rgba(255,215,0,0.1); padding: 10px 22px; border-radius: 50px; font-weight: 500; border: 1px solid rgba(255,215,0,0.2); transition: all 0.3s; }
+        .about-stats .stat:hover { background: rgba(255,215,0,0.2); transform: scale(1.05); }
         
-        .about-stats {
-            display: flex;
-            gap: 25px;
-            flex-wrap: wrap;
-        }
+        .contact-bar { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-radius: 20px; padding: 20px 30px; margin-bottom: 40px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 15px; border: 1px solid rgba(255,215,0,0.15); }
+        .contact-item { display: flex; align-items: center; gap: 10px; font-size: 14px; color: rgba(255,255,255,0.9); transition: all 0.3s; }
+        .contact-item:hover { transform: translateX(5px); color: #FFD700; }
+        .contact-item a { color: #FFD700; text-decoration: none; }
         
-        .about-stats .stat {
-            background: rgba(255,215,0,0.1);
-            padding: 10px 22px;
-            border-radius: 50px;
-            font-weight: 500;
-            border: 1px solid rgba(255,215,0,0.2);
-            transition: all 0.3s;
-        }
-        
-        .about-stats .stat:hover {
-            background: rgba(255,215,0,0.2);
-            transform: scale(1.05);
-        }
-        
-        /* 联系方式栏 */
-        .contact-bar {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 20px 30px;
-            margin-bottom: 40px;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 15px;
-            border: 1px solid rgba(255,215,0,0.15);
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-            color: rgba(255,255,255,0.9);
-            transition: all 0.3s;
-        }
-        
-        .contact-item:hover {
-            transform: translateX(5px);
-            color: #FFD700;
-        }
-        
-        .contact-item a {
-            color: #FFD700;
-            text-decoration: none;
-        }
-        
-        /* 搜索框 */
-        .search-card {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 30px;
-            margin-bottom: 40px;
-            border: 1px solid rgba(255,215,0,0.15);
-            transition: all 0.3s;
-        }
-        
+        .search-card { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-radius: 24px; padding: 30px; margin-bottom: 40px; border: 1px solid rgba(255,215,0,0.15); transition: all 0.3s; }
         .search-card:hover { border-color: rgba(255,215,0,0.3); }
         .search-card h3 { color: #FFD700; margin-bottom: 15px; font-size: 20px; }
+        #searchInput { width: 100%; padding: 15px 22px; font-size: 16px; border: 1px solid rgba(255,215,0,0.3); border-radius: 60px; outline: none; background: rgba(0,0,0,0.3); color: white; transition: all 0.3s; }
+        #searchInput:focus { border-color: #FFD700; box-shadow: 0 0 0 4px rgba(255,215,0,0.1); }
+        .search-results { margin-top: 20px; max-height: 300px; overflow-y: auto; }
+        .result-item { padding: 12px 18px; border-bottom: 1px solid rgba(255,255,255,0.1); transition: all 0.3s; cursor: pointer; }
+        .result-item:hover { background: rgba(255,215,0,0.1); transform: translateX(5px); }
+        .result-item a { text-decoration: none; color: #FFD700; font-weight: 500; display: block; }
         
-        #searchInput {
-            width: 100%;
-            padding: 15px 22px;
-            font-size: 16px;
-            border: 1px solid rgba(255,215,0,0.3);
-            border-radius: 60px;
-            outline: none;
-            background: rgba(0,0,0,0.3);
-            color: white;
-            transition: all 0.3s;
-        }
-        
-        #searchInput:focus {
-            border-color: #FFD700;
-            box-shadow: 0 0 0 4px rgba(255,215,0,0.1);
-        }
-        
-        .search-results {
-            margin-top: 20px;
-            max-height: 260px;
-            overflow-y: auto;
-        }
-        
-        .result-item {
-            padding: 12px 18px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.3s;
-        }
-        
-        .result-item:hover {
-            background: rgba(255,215,0,0.1);
-            transform: translateX(5px);
-        }
-        
-        .result-item a {
-            text-decoration: none;
-            color: #FFD700;
-            font-weight: 500;
-        }
-        
-        /* 对比区域 */
-        .compare-section {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 30px;
-            margin-bottom: 40px;
-            border: 1px solid rgba(255,215,0,0.15);
-        }
-        
+        .compare-section { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-radius: 24px; padding: 30px; margin-bottom: 40px; border: 1px solid rgba(255,215,0,0.15); }
         .compare-section h3 { color: #FFD700; margin-bottom: 20px; font-size: 20px; }
-        
-        .compare-selectors {
-            display: flex;
-            gap: 25px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .compare-selector {
-            flex: 1;
-            min-width: 220px;
-        }
-        
-        .compare-selector label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 600;
-            color: rgba(255,255,255,0.8);
-        }
-        
-        .compare-selector select {
-            width: 100%;
-            padding: 12px 16px;
-            font-size: 14px;
-            border: 1px solid rgba(255,215,0,0.3);
-            border-radius: 14px;
-            outline: none;
-            background: rgba(0,0,0,0.3);
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .compare-selector select:focus {
-            border-color: #FFD700;
-            box-shadow: 0 0 0 3px rgba(255,215,0,0.1);
-        }
-        
+        .compare-selectors { display: flex; gap: 25px; margin-bottom: 30px; flex-wrap: wrap; }
+        .compare-selector { flex: 1; min-width: 220px; }
+        .compare-selector label { display: block; margin-bottom: 10px; font-weight: 600; color: rgba(255,255,255,0.8); }
+        .compare-selector select { width: 100%; padding: 12px 16px; font-size: 14px; border: 1px solid rgba(255,215,0,0.3); border-radius: 14px; outline: none; background: rgba(0,0,0,0.3); color: white; cursor: pointer; transition: all 0.3s; }
+        .compare-selector select:focus { border-color: #FFD700; box-shadow: 0 0 0 3px rgba(255,215,0,0.1); }
         .compare-table { overflow-x: auto; }
         .compare-table table { width: 100%; border-collapse: collapse; border-radius: 16px; overflow: hidden; }
-        .compare-table th {
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-            color: #0a1628;
-            padding: 14px;
-            text-align: center;
-            font-weight: 700;
-        }
-        .compare-table td {
-            padding: 12px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.9);
-        }
-        .compare-table td:first-child {
-            background: rgba(0,0,0,0.2);
-            font-weight: 600;
-            width: 160px;
-        }
-        
+        .compare-table th { background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #0a1628; padding: 14px; text-align: center; font-weight: 700; }
+        .compare-table td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.9); }
+        .compare-table td:first-child { background: rgba(0,0,0,0.2); font-weight: 600; width: 160px; }
         .warning { background: rgba(255,193,7,0.15); color: #FFD700; padding: 15px; border-radius: 14px; text-align: center; }
         .no-data { text-align: center; color: rgba(255,255,255,0.5); padding: 50px; }
         
-        /* 统计卡片 + 数字动画 */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-bottom: 40px;
-        }
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 40px; }
+        .stat-card { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); padding: 25px; text-align: center; border-radius: 20px; border: 1px solid rgba(255,215,0,0.15); transition: all 0.3s; cursor: pointer; }
+        .stat-card:hover { transform: translateY(-8px); border-color: rgba(255,215,0,0.5); box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
+        .stat-number { font-size: 42px; font-weight: 800; color: #FFD700; }
+        .stat-label { color: rgba(255,255,255,0.7); font-size: 14px; margin-top: 8px; }
         
-        .stat-card {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-            padding: 25px;
-            text-align: center;
-            border-radius: 20px;
-            border: 1px solid rgba(255,215,0,0.15);
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(255,215,0,0.5);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-        }
-        
-        .stat-number {
-            font-size: 42px;
-            font-weight: 800;
-            color: #FFD700;
-        }
-        
-        .stat-label {
-            color: rgba(255,255,255,0.7);
-            font-size: 14px;
-            margin-top: 8px;
-        }
-        
-        /* 应用领域 */
-        .applications-card {
-            background: linear-gradient(135deg, rgba(13,71,161,0.3) 0%, rgba(21,101,192,0.2) 100%);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 40px;
-            margin-bottom: 40px;
-            text-align: center;
-            border: 1px solid rgba(255,215,0,0.15);
-        }
-        
+        .applications-card { background: linear-gradient(135deg, rgba(13,71,161,0.3) 0%, rgba(21,101,192,0.2) 100%); backdrop-filter: blur(10px); border-radius: 24px; padding: 40px; margin-bottom: 40px; text-align: center; border: 1px solid rgba(255,215,0,0.15); }
         .applications-card h3 { color: #FFD700; font-size: 24px; margin-bottom: 25px; }
+        .apps-grid { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .app-tag { background: rgba(255,215,0,0.1); padding: 10px 24px; border-radius: 50px; font-weight: 500; color: rgba(255,255,255,0.9); border: 1px solid rgba(255,215,0,0.2); transition: all 0.3s; }
+        .app-tag:hover { background: rgba(255,215,0,0.2); transform: scale(1.05); cursor: pointer; }
         
-        .apps-grid {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .app-tag {
-            background: rgba(255,215,0,0.1);
-            padding: 10px 24px;
-            border-radius: 50px;
-            font-weight: 500;
-            color: rgba(255,255,255,0.9);
-            border: 1px solid rgba(255,215,0,0.2);
-            transition: all 0.3s;
-        }
-        
-        .app-tag:hover {
-            background: rgba(255,215,0,0.2);
-            transform: scale(1.05);
-            cursor: pointer;
-        }
-        
-        /* 证书区 */
-        .cert-simple {
-            background: linear-gradient(135deg, rgba(13,71,161,0.4) 0%, rgba(21,101,192,0.3) 100%);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 35px;
-            margin-bottom: 40px;
-            text-align: center;
-            border: 1px solid rgba(255,215,0,0.2);
-        }
-        
+        .cert-simple { background: linear-gradient(135deg, rgba(13,71,161,0.4) 0%, rgba(21,101,192,0.3) 100%); backdrop-filter: blur(10px); border-radius: 24px; padding: 35px; margin-bottom: 40px; text-align: center; border: 1px solid rgba(255,215,0,0.2); }
         .cert-simple h3 { color: #FFD700; font-size: 22px; margin-bottom: 15px; }
-        
-        .cert-brands {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin: 20px 0;
-        }
-        
-        .cert-brands span {
-            background: rgba(255,215,0,0.1);
-            padding: 8px 24px;
-            border-radius: 40px;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-        
-        .cert-brands span:hover {
-            background: rgba(255,215,0,0.2);
-            transform: scale(1.05);
-        }
-        
-        .cert-link-btn {
-            display: inline-block;
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-            color: #0a1628;
-            padding: 10px 32px;
-            border-radius: 40px;
-            text-decoration: none;
-            font-weight: 700;
-            margin-top: 15px;
-            transition: all 0.3s;
-        }
-        
-        .cert-link-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(255,215,0,0.3);
-        }
-        
-        .footer {
-            text-align: center;
-            padding: 40px;
-            color: rgba(255,255,255,0.4);
-            font-size: 13px;
-            border-top: 1px solid rgba(255,215,0,0.1);
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
+        .cert-brands { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin: 20px 0; }
+        .cert-brands span { background: rgba(255,215,0,0.1); padding: 8px 24px; border-radius: 40px; font-size: 14px; transition: all 0.3s; }
+        .cert-brands span:hover { background: rgba(255,215,0,0.2); transform: scale(1.05); }
+        .cert-link-btn { display: inline-block; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #0a1628; padding: 10px 32px; border-radius: 40px; text-decoration: none; font-weight: 700; margin-top: 15px; transition: all 0.3s; }
+        .cert-link-btn:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(255,215,0,0.3); }
+        .footer { text-align: center; padding: 40px; color: rgba(255,255,255,0.4); font-size: 13px; border-top: 1px solid rgba(255,215,0,0.1); }
         
         @media (max-width: 768px) {
             .hero-title { font-size: 32px; }
             .hero-logo { font-size: 36px; letter-spacing: 3px; }
-            .hero-tagline { letter-spacing: 4px; font-size: 12px; }
             .navbar { flex-direction: column; text-align: center; margin-top: 10px; }
             .stats { grid-template-columns: repeat(2, 1fr); }
             .about-card { padding: 30px 25px; }
             .compare-selectors { flex-direction: column; }
-            .section-title { font-size: 28px; }
         }
     </style>
 </head>
 <body>
-    <!-- 视频背景区域 -->
     <div class="hero-section">
         <video class="hero-video" autoplay muted loop playsinline>
             <source src="https://assets.mixkit.co/videos/preview/mixkit-factory-machinery-working-38625-large.mp4" type="video/mp4">
@@ -675,7 +142,6 @@
     </div>
     
     <div class="container">
-        <!-- 导航栏 -->
         <div class="navbar">
             <div class="logo">
                 <h1><a href="index.html">SETSAIL</a></h1>
@@ -689,7 +155,6 @@
             </div>
         </div>
         
-        <!-- 公司简介 - 滚动动画 -->
         <div class="about-card card-animate" data-aos="fade-up">
             <div class="en-title">—— ABOUT SETSAIL ——</div>
             <h2>东莞市启航塑胶有限公司</h2>
@@ -704,7 +169,6 @@
             </div>
         </div>
         
-        <!-- 联系方式 -->
         <div class="contact-bar card-animate" data-aos="fade-up" data-aos-delay="100" id="contact">
             <span class="contact-item">📞 联系人：Shirly</span>
             <span class="contact-item">📱 电话：18925440603</span>
@@ -712,14 +176,12 @@
             <span class="contact-item">💬 微信：18925440603</span>
         </div>
         
-        <!-- 快速搜索 -->
         <div class="search-card card-animate" data-aos="fade-up" data-aos-delay="150">
             <h3>🔍 快速搜索牌号</h3>
             <input type="text" id="searchInput" placeholder="输入牌号，如 ZA02111, M90-44, CM-211, PC-1100..." onkeyup="searchGrade()">
             <div id="searchResults" class="search-results"></div>
         </div>
         
-        <!-- 产品性能对比 -->
         <div class="compare-section card-animate" data-aos="fade-up" data-aos-delay="200" id="products">
             <h3>📊 产品性能对比</h3>
             <div class="compare-selectors">
@@ -741,27 +203,13 @@
             </div>
         </div>
         
-        <!-- 统计卡片 + 数字动画 -->
         <div class="stats">
-            <div class="stat-card" id="stat1">
-                <div class="stat-number"><span class="counter" data-target="74">0</span></div>
-                <div class="stat-label">常备牌号</div>
-            </div>
-            <div class="stat-card" id="stat2">
-                <div class="stat-number"><span class="counter" data-target="4">0</span></div>
-                <div class="stat-label">材料种类</div>
-            </div>
-            <div class="stat-card" id="stat3">
-                <div class="stat-number"><span class="counter" data-target="3">0</span></div>
-                <div class="stat-label">授权品牌</div>
-            </div>
-            <div class="stat-card" id="stat4">
-                <div class="stat-number"><span class="counter" data-target="10">0</span><span style="font-size:24px;">年</span></div>
-                <div class="stat-label">行业经验</div>
-            </div>
+            <div class="stat-card"><div class="stat-number"><span class="counter" data-target="74">0</span></div><div class="stat-label">常备牌号</div></div>
+            <div class="stat-card"><div class="stat-number"><span class="counter" data-target="4">0</span></div><div class="stat-label">材料种类</div></div>
+            <div class="stat-card"><div class="stat-number"><span class="counter" data-target="3">0</span></div><div class="stat-label">授权品牌</div></div>
+            <div class="stat-card"><div class="stat-number"><span class="counter" data-target="10">0</span><span style="font-size:24px;">年</span></div><div class="stat-label">行业经验</div></div>
         </div>
         
-        <!-- 产品应用领域 -->
         <div class="applications-card card-animate" data-aos="fade-up" data-aos-delay="250">
             <h3>🎯 产品应用领域</h3>
             <div class="apps-grid">
@@ -776,7 +224,6 @@
             </div>
         </div>
         
-        <!-- 授权证书简化区 -->
         <div class="cert-simple card-animate" data-aos="fade-up" data-aos-delay="300">
             <h3>🏅 官方授权经销商</h3>
             <div class="cert-brands">
@@ -787,7 +234,6 @@
             <a href="certificates.html" class="cert-link-btn">查看完整授权证书 →</a>
         </div>
         
-        <!-- 页脚 -->
         <div class="footer">
             <p>© 2026 SETSAIL PLASTICS · 东莞市启航塑胶有限公司</p>
             <p>让数据说话，让AI服务 | 数据最后更新：2026-05-31</p>
@@ -795,72 +241,59 @@
     </div>
     
     <script>
+        AOS.init({ duration: 800, once: true, offset: 100 });
+        
         // 数字动画
         const counters = document.querySelectorAll('.counter');
-        const speed = 200;
-        
-        const animateCounter = (counter) => {
-            const target = parseInt(counter.getAttribute('data-target'));
-            let current = 0;
-            const increment = target / speed;
-            const updateCounter = () => {
-                current += increment;
-                if (current < target) {
-                    counter.innerText = Math.ceil(current);
-                    setTimeout(updateCounter, 20);
-                } else {
-                    counter.innerText = target;
-                }
-            };
-            updateCounter();
-        };
-        
-        // 滚动触发数字动画
-        const observerOptions = { threshold: 0.5 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const counter = entry.target.querySelector('.counter');
-                    if (counter && counter.innerText === '0') {
-                        animateCounter(counter);
+                    const counter = entry.target;
+                    if (counter.innerText === '0') {
+                        const target = parseInt(counter.getAttribute('data-target'));
+                        let current = 0;
+                        const increment = target / 80;
+                        const update = () => {
+                            current += increment;
+                            if (current < target) {
+                                counter.innerText = Math.ceil(current);
+                                requestAnimationFrame(update);
+                            } else {
+                                counter.innerText = target;
+                            }
+                        };
+                        update();
                     }
-                    observer.unobserve(entry.target);
+                    observer.unobserve(counter);
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.5 });
+        counters.forEach(c => observer.observe(c));
         
-        document.querySelectorAll('.stat-card').forEach(card => {
-            observer.observe(card);
-        });
-        
-        // AOS初始化
-        AOS.init({ duration: 800, once: true, offset: 100 });
-        
-        // 滚动时导航栏效果
+        // 滚动导航栏效果
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('navbar-scrolled');
-            } else {
-                navbar.classList.remove('navbar-scrolled');
-            }
+            if (window.scrollY > 100) navbar.classList.add('navbar-scrolled');
+            else navbar.classList.remove('navbar-scrolled');
         });
         
-        // 数据加载
+        // ========== 核心数据存储 ==========
         let allMaterialsData = {};
         let allMaterialOptions = [];
+        let allSearchMaterials = [];
         
         async function loadMaterialData(grade, material) {
             const url = `https://raw.githubusercontent.com/MORES121/polymer-datahub/main/data/${material}/${grade}.json`;
             try {
                 const res = await fetch(url);
                 if (res.ok) return await res.json();
-            } catch(e) {}
+            } catch(e) { console.error('加载失败:', grade, e); }
             return null;
         }
         
-        async function loadAllForCompare() {
+        async function loadAllData() {
             const materials = ['ABS', 'POM', 'PMMA', 'PC'];
+            console.log('开始加载所有材料数据...');
             for (const m of materials) {
                 const url = `https://api.github.com/repos/MORES121/polymer-datahub/contents/data/${m}`;
                 try {
@@ -870,18 +303,22 @@
                         for (const file of data.filter(f => f.name.endsWith('.json'))) {
                             const grade = file.name.replace('.json', '');
                             allMaterialOptions.push({ grade: grade, material: m });
+                            allSearchMaterials.push({ name: grade, material: m, url: file.download_url });
                             const md = await loadMaterialData(grade, m);
                             if (md) allMaterialsData[`${m}_${grade}`] = md;
                         }
                     }
-                } catch(e) {}
+                } catch(e) { console.error('加载材料失败:', m, e); }
             }
+            console.log('数据加载完成，共', allMaterialOptions.length, '个牌号');
             populateSelects();
+            console.log('搜索数据已准备，共', allSearchMaterials.length, '个牌号');
         }
         
         function populateSelects() {
             const selectA = document.getElementById('compareA');
             const selectB = document.getElementById('compareB');
+            if (!selectA || !selectB) return;
             allMaterialOptions.sort((a, b) => a.material.localeCompare(b.material) || a.grade.localeCompare(b.grade));
             const grouped = {};
             for (const opt of allMaterialOptions) {
@@ -905,29 +342,60 @@
         }
         
         async function downloadPDF(grade, material) {
-            const data = allMaterialsData[`${material}_${grade}`];
-            if (!data) { alert('数据加载失败'); return; }
-            const props = data.technical_specifications.key_properties;
-            const pdfHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${grade} 技术数据表</title>
-            <style>body{font-family:Arial;padding:40px;} h1{color:#FFD700;} table{width:100%;border-collapse:collapse;} th,td{border:1px solid #ddd;padding:10px;} th{background:#FFD700;color:#0a1628;}</style>
-            </head><body><h1>${grade} 技术数据表</h1>
-            <p><strong>品牌：</strong>${data.metadata.brand}</p><p><strong>数据来源：</strong>SETSAIL PLASTICS 启航塑胶</p>
-            <table><th>属性</th><th>数值</th></tr>
-            <tr><td>基体材料</td><td>${data.technical_specifications.base_polymer}</td></tr>
-            <tr><td>增强材料</td><td>${data.technical_specifications.reinforcement}</td></tr>
-            <tr><td>拉伸强度 (MPa)</td><td>${props.tensile_strength_mpa || '—'}</td></tr>
-            <tr><td>弯曲模量 (MPa)</td><td>${props.flexural_modulus_mpa || '—'}</td></tr>
-            <tr><td>冲击强度 (J/m)</td><td>${props.izod_impact_j_m || '—'}</td></tr>
-            <tr><td>热变形温度 (°C)</td><td>${props.heat_deflection_temp_c || '—'}</td></tr>
-            <tr><td>阻燃等级</td><td>${props.ul94_rating || '—'}</td></tr>
-            <tr><td>典型应用</td><td>${data.value_proposition?.typical_applications?.join('、') || '—'}</td></tr>
-            </table><div style="margin-top:30px;text-align:center;color:#999;">SETSAIL PLASTICS | 电话：18925440603</div>
-            </body></html>`;
-            const el = document.createElement('div');
-            el.innerHTML = pdfHtml;
-            document.body.appendChild(el);
-            await html2pdf().from(el).set({ margin: 1, filename: `${grade}_技术数据表.pdf` }).save();
-            document.body.removeChild(el);
+            const key = `${material}_${grade}`;
+            let data = allMaterialsData[key];
+            if (!data) {
+                data = await loadMaterialData(grade, material);
+                if (data) allMaterialsData[key] = data;
+            }
+            if (!data) {
+                alert('数据加载失败，请重试');
+                return;
+            }
+            const props = data.technical_specifications?.key_properties || {};
+            const htmlContent = `
+                <!DOCTYPE html>
+                <html>
+                <head><meta charset="UTF-8"><title>${grade} 技术数据表</title>
+                <style>
+                    body { font-family: Arial, sans-serif; padding: 40px; }
+                    h1 { color: #FFD700; }
+                    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+                    th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+                    th { background: #FFD700; color: #0a1628; }
+                    .footer { margin-top: 30px; text-align: center; color: #999; font-size: 12px; }
+                </style>
+                </head>
+                <body>
+                    <h1>${grade} 技术数据表</h1>
+                    <p><strong>品牌：</strong>${data.metadata?.brand || '启航塑胶'}</p>
+                    <p><strong>数据来源：</strong>SETSAIL PLASTICS 启航塑胶</p>
+                    <table>
+                        <tr><th>属性</th><th>数值</th></tr>
+                        <tr><td>基体材料</td><td>${data.technical_specifications?.base_polymer || '—'}</td></tr>
+                        <tr><td>增强材料</td><td>${data.technical_specifications?.reinforcement || '—'}</td></tr>
+                        <tr><td>拉伸强度 (MPa)</td><td>${props.tensile_strength_mpa || '—'}</td></tr>
+                        <tr><td>弯曲模量 (MPa)</td><td>${props.flexural_modulus_mpa || '—'}</td></tr>
+                        <tr><td>冲击强度 (J/m)</td><td>${props.izod_impact_j_m || '—'}</td></tr>
+                        <tr><td>热变形温度 (°C)</td><td>${props.heat_deflection_temp_c || '—'}</td></tr>
+                        <tr><td>阻燃等级</td><td>${props.ul94_rating || '—'}</td></tr>
+                        <tr><td>典型应用</td><td>${data.value_proposition?.typical_applications?.join('、') || '—'}</td></tr>
+                        <tr><td>解决痛点</td><td>${data.value_proposition?.solved_pain_points?.join('、') || '—'}</td></tr>
+                    </table>
+                    <div class="footer">
+                        <p>SETSAIL PLASTICS 启航塑胶 | 电话：18925440603</p>
+                        <p>数据最后更新：${data.metadata?.last_updated || '2026-05-31'}</p>
+                    </div>
+                </body>
+                </html>
+            `;
+            const element = document.createElement('div');
+            element.innerHTML = htmlContent;
+            document.body.appendChild(element);
+            try {
+                await html2pdf().from(element).set({ margin: 1, filename: `${grade}_技术数据表.pdf` }).save();
+            } catch(e) { alert('PDF生成失败: ' + e.message); }
+            document.body.removeChild(element);
         }
         
         async function loadCompareData() {
@@ -943,18 +411,18 @@
             if (!dA) { dA = await loadMaterialData(gA, mA); if(dA) allMaterialsData[`${mA}_${gA}`]=dA; }
             if (!dB) { dB = await loadMaterialData(gB, mB); if(dB) allMaterialsData[`${mB}_${gB}`]=dB; }
             if (!dA || !dB) { resultDiv.innerHTML = '<div class="no-data">数据加载失败</div>'; return; }
-            const pA = dA.technical_specifications.key_properties;
-            const pB = dB.technical_specifications.key_properties;
+            const pA = dA.technical_specifications?.key_properties || {};
+            const pB = dB.technical_specifications?.key_properties || {};
             const f = v => v===null||v===undefined?'—':v;
             resultDiv.innerHTML = `
                 <div style="margin-bottom:15px;text-align:right">
                     <button onclick="downloadPDF('${gA}','${mA}')" style="background:#FFD700;color:#0a1628;border:none;padding:8px 18px;border-radius:30px;cursor:pointer;font-weight:600;">📄 下载 ${gA} PDF</button>
                     <button onclick="downloadPDF('${gB}','${mB}')" style="background:#FFD700;color:#0a1628;border:none;padding:8px 18px;border-radius:30px;cursor:pointer;margin-left:10px;font-weight:600;">📄 下载 ${gB} PDF</button>
                 </div>
-                </table><th>属性</th><th>${gA} (${mA})</th><th>${gB} (${mB})</th></tr>
-                <tr><td>品牌</td><td>${dA.metadata.brand}</td><td>${dB.metadata.brand}</td></tr>
-                <tr><td>基体材料</td><td>${dA.technical_specifications.base_polymer}</td><td>${dB.technical_specifications.base_polymer}</td></tr>
-                <tr><td>增强材料</td><td>${dA.technical_specifications.reinforcement}</td><td>${dB.technical_specifications.reinforcement}</td></tr>
+                <table><th>属性</th><th>${gA} (${mA})</th><th>${gB} (${mB})</th></tr>
+                <tr><td>品牌</td><td>${dA.metadata?.brand || '—'}</td><td>${dB.metadata?.brand || '—'}</td></tr>
+                <tr><td>基体材料</td><td>${dA.technical_specifications?.base_polymer || '—'}</td><td>${dB.technical_specifications?.base_polymer || '—'}</td></tr>
+                <tr><td>增强材料</td><td>${dA.technical_specifications?.reinforcement || '—'}</td><td>${dB.technical_specifications?.reinforcement || '—'}</td></tr>
                 <tr><td>拉伸强度 (MPa)</td><td>${f(pA.tensile_strength_mpa)}</td><td>${f(pB.tensile_strength_mpa)}</td></tr>
                 <tr><td>弯曲模量 (MPa)</td><td>${f(pA.flexural_modulus_mpa)}</td><td>${f(pB.flexural_modulus_mpa)}</td></tr>
                 <tr><td>冲击强度 (J/m)</td><td>${f(pA.izod_impact_j_m)}</td><td>${f(pB.izod_impact_j_m)}</td></tr>
@@ -966,34 +434,19 @@
             `;
         }
         
-        let allSearch = [];
-        async function loadSearch() {
-            const mats = ['ABS', 'POM', 'PMMA', 'PC'];
-            for (const m of mats) {
-                const url = `https://api.github.com/repos/MORES121/polymer-datahub/contents/data/${m}`;
-                try {
-                    const res = await fetch(url);
-                    const data = await res.json();
-                    if (Array.isArray(data)) {
-                        data.filter(f => f.name.endsWith('.json')).forEach(f => {
-                            allSearch.push({ name: f.name.replace('.json', ''), material: m, url: f.download_url });
-                        });
-                    }
-                } catch(e) {}
-            }
-        }
-        
         function searchGrade() {
             const kw = document.getElementById('searchInput').value.trim().toLowerCase();
             const div = document.getElementById('searchResults');
-            if (kw.length < 2) { div.innerHTML = ''; return; }
-            const res = allSearch.filter(m => m.name.toLowerCase().includes(kw));
-            if (res.length === 0) { div.innerHTML = '<div class="result-item">未找到匹配的牌号</div>'; return; }
-            div.innerHTML = res.slice(0, 20).map(r => `<div class="result-item"><a href="${r.url}" target="_blank">${r.name}</a> <span style="opacity:0.5">${r.material}</span></div>`).join('');
+            if (kw.length < 1) { div.innerHTML = ''; return; }
+            const results = allSearchMaterials.filter(m => m.name.toLowerCase().includes(kw));
+            if (results.length === 0) { div.innerHTML = '<div class="result-item">未找到匹配的牌号</div>'; return; }
+            div.innerHTML = results.slice(0, 30).map(r => `<div class="result-item"><a href="${r.url}" target="_blank">${r.name}</a> <span style="opacity:0.5">${r.material}</span></div>`).join('');
         }
         
-        loadAllForCompare();
-        loadSearch();
+        // 页面加载完成后启动
+        window.addEventListener('DOMContentLoaded', () => {
+            loadAllData();
+        });
     </script>
 </body>
 </html>
