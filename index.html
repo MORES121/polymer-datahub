@@ -5,10 +5,11 @@
     <meta name="msvalidate.01" content="2016DD51A716F11C2A381D52711BC5D9" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>SETSAIL PLASTICS | 启航塑胶 | 工程塑料专家</title>
-    <meta name="description" content="SETSAIL PLASTICS启航塑胶-日本大赛路、日本T-UMG、德国恩信格官方授权经销商，提供ABS、POM、PMMA、PC等工程塑料。">
-    <meta name="keywords" content="SETSAIL,启航塑胶,ABS,POM,PMMA,PC,工程塑料">
+    <meta name="description" content="SETSAIL PLASTICS启航塑胶-日本大赛路、日本T-UMG、德国恩信格官方授权经销商">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <style>
         * {
             margin: 0;
@@ -21,16 +22,20 @@
             background: #0a1628;
             color: #ffffff;
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
         
-        /* 视频背景区域 */
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #FFD700; border-radius: 10px; }
+        
+        /* 视频背景区域 - 带动画 */
         .hero-section {
             position: relative;
-            height: 85vh;
-            min-height: 600px;
-            border-radius: 0 0 40px 40px;
+            height: 100vh;
+            min-height: 700px;
             overflow: hidden;
-            margin-bottom: 40px;
         }
         
         .hero-video {
@@ -41,6 +46,12 @@
             height: 100%;
             object-fit: cover;
             z-index: 0;
+            animation: scaleVideo 20s ease-in-out infinite alternate;
+        }
+        
+        @keyframes scaleVideo {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
         }
         
         .hero-overlay {
@@ -63,68 +74,100 @@
             align-items: center;
             text-align: center;
             padding: 20px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .hero-logo {
-            font-size: 56px;
+            font-size: 64px;
             font-weight: 800;
-            letter-spacing: 4px;
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            letter-spacing: 6px;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             margin-bottom: 20px;
-            text-shadow: 0 0 30px rgba(255,215,0,0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; text-shadow: 0 0 20px rgba(255,215,0,0.3); }
+            50% { opacity: 0.95; text-shadow: 0 0 40px rgba(255,215,0,0.6); }
         }
         
         .hero-tagline {
-            font-size: 18px;
-            letter-spacing: 6px;
+            font-size: 16px;
+            letter-spacing: 8px;
             opacity: 0.9;
             margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
         }
         
         .hero-title {
-            font-size: 42px;
+            font-size: 52px;
             font-weight: 700;
             margin-bottom: 20px;
             max-width: 800px;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
         }
         
         .hero-desc {
             font-size: 18px;
             opacity: 0.85;
             max-width: 600px;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
         }
         
         .hero-buttons {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             flex-wrap: wrap;
             justify-content: center;
+            animation: fadeInUp 0.8s ease-out 0.8s both;
         }
         
         .btn-primary {
             background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
             color: #0a1628;
-            padding: 14px 32px;
+            padding: 14px 38px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 700;
             transition: all 0.3s;
             box-shadow: 0 4px 15px rgba(255,215,0,0.3);
+            position: relative;
+            overflow: hidden;
         }
         
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255,215,0,0.4);
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
         }
+        
+        .btn-primary:hover::before { left: 100%; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255,215,0,0.4); }
         
         .btn-outline {
             border: 2px solid #FFD700;
             color: #FFD700;
-            padding: 12px 30px;
+            padding: 12px 35px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
@@ -133,7 +176,8 @@
         
         .btn-outline:hover {
             background: rgba(255,215,0,0.1);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(255,215,0,0.2);
         }
         
         .container {
@@ -142,21 +186,34 @@
             padding: 0 20px;
         }
         
-        /* 导航栏 - 透明玻璃效果 */
+        /* 导航栏 - 玻璃效果 + 滚动动画 */
         .navbar {
             background: rgba(10,22,40,0.95);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
             border-radius: 60px;
             padding: 12px 30px;
-            margin-bottom: 0;
+            margin-top: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 20px;
             position: relative;
-            z-index: 10;
+            z-index: 100;
             border: 1px solid rgba(255,215,0,0.2);
+            transition: all 0.3s;
+        }
+        
+        .navbar-scrolled {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            margin: 0;
+            border-radius: 0;
+            background: rgba(10,22,40,0.98);
+            padding: 12px 40px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
         }
         
         .logo h1 {
@@ -168,7 +225,10 @@
         .logo h1 a {
             color: #FFD700;
             text-decoration: none;
+            transition: all 0.3s;
         }
+        
+        .logo h1 a:hover { text-shadow: 0 0 10px rgba(255,215,0,0.5); }
         
         .logo .logo-sub {
             font-size: 10px;
@@ -191,32 +251,59 @@
             font-weight: 500;
             padding: 8px 20px;
             border-radius: 40px;
-            transition: all 0.2s;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: #FFD700;
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 30px;
         }
         
         .nav-links a:hover,
         .nav-links a.active {
-            background: rgba(255,215,0,0.15);
+            background: rgba(255,215,0,0.1);
             color: #FFD700;
         }
         
-        /* 卡片通用样式 */
+        /* 卡片通用样式 + 滚动动画 */
+        .card-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+        
+        .card-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
         .section-title {
             text-align: center;
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 700;
             margin-bottom: 15px;
         }
+        
+        .section-title span { color: #FFD700; }
         
         .section-subtitle {
             text-align: center;
             font-size: 16px;
             opacity: 0.7;
-            margin-bottom: 40px;
-        }
-        
-        .gold-text {
-            color: #FFD700;
+            margin-bottom: 50px;
         }
         
         /* 公司简介卡片 */
@@ -227,25 +314,18 @@
             padding: 45px 40px;
             margin-bottom: 40px;
             border: 1px solid rgba(255,215,0,0.2);
+            transition: all 0.3s;
         }
         
-        .about-card h2 {
-            font-size: 28px;
-            margin-bottom: 20px;
+        .about-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,215,0,0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
         
-        .about-card .en-title {
-            font-size: 12px;
-            color: #FFD700;
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-        }
-        
-        .about-card p {
-            line-height: 1.9;
-            opacity: 0.9;
-            margin-bottom: 30px;
-        }
+        .about-card h2 { font-size: 28px; margin-bottom: 20px; }
+        .about-card .en-title { font-size: 12px; color: #FFD700; letter-spacing: 3px; margin-bottom: 15px; }
+        .about-card p { line-height: 1.9; opacity: 0.9; margin-bottom: 30px; }
         
         .about-stats {
             display: flex;
@@ -259,6 +339,12 @@
             border-radius: 50px;
             font-weight: 500;
             border: 1px solid rgba(255,215,0,0.2);
+            transition: all 0.3s;
+        }
+        
+        .about-stats .stat:hover {
+            background: rgba(255,215,0,0.2);
+            transform: scale(1.05);
         }
         
         /* 联系方式栏 */
@@ -281,6 +367,12 @@
             gap: 10px;
             font-size: 14px;
             color: rgba(255,255,255,0.9);
+            transition: all 0.3s;
+        }
+        
+        .contact-item:hover {
+            transform: translateX(5px);
+            color: #FFD700;
         }
         
         .contact-item a {
@@ -296,13 +388,11 @@
             padding: 30px;
             margin-bottom: 40px;
             border: 1px solid rgba(255,215,0,0.15);
+            transition: all 0.3s;
         }
         
-        .search-card h3 {
-            color: #FFD700;
-            margin-bottom: 15px;
-            font-size: 20px;
-        }
+        .search-card:hover { border-color: rgba(255,215,0,0.3); }
+        .search-card h3 { color: #FFD700; margin-bottom: 15px; font-size: 20px; }
         
         #searchInput {
             width: 100%;
@@ -313,15 +403,12 @@
             outline: none;
             background: rgba(0,0,0,0.3);
             color: white;
+            transition: all 0.3s;
         }
         
         #searchInput:focus {
             border-color: #FFD700;
-            box-shadow: 0 0 0 3px rgba(255,215,0,0.1);
-        }
-        
-        #searchInput::placeholder {
-            color: rgba(255,255,255,0.5);
+            box-shadow: 0 0 0 4px rgba(255,215,0,0.1);
         }
         
         .search-results {
@@ -333,10 +420,12 @@
         .result-item {
             padding: 12px 18px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
         }
         
         .result-item:hover {
             background: rgba(255,215,0,0.1);
+            transform: translateX(5px);
         }
         
         .result-item a {
@@ -355,11 +444,7 @@
             border: 1px solid rgba(255,215,0,0.15);
         }
         
-        .compare-section h3 {
-            color: #FFD700;
-            margin-bottom: 20px;
-            font-size: 20px;
-        }
+        .compare-section h3 { color: #FFD700; margin-bottom: 20px; font-size: 20px; }
         
         .compare-selectors {
             display: flex;
@@ -390,23 +475,16 @@
             background: rgba(0,0,0,0.3);
             color: white;
             cursor: pointer;
+            transition: all 0.3s;
         }
         
         .compare-selector select:focus {
             border-color: #FFD700;
+            box-shadow: 0 0 0 3px rgba(255,215,0,0.1);
         }
         
-        .compare-table {
-            overflow-x: auto;
-        }
-        
-        .compare-table table {
-            width: 100%;
-            border-collapse: collapse;
-            border-radius: 16px;
-            overflow: hidden;
-        }
-        
+        .compare-table { overflow-x: auto; }
+        .compare-table table { width: 100%; border-collapse: collapse; border-radius: 16px; overflow: hidden; }
         .compare-table th {
             background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
             color: #0a1628;
@@ -414,34 +492,21 @@
             text-align: center;
             font-weight: 700;
         }
-        
         .compare-table td {
             padding: 12px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
             color: rgba(255,255,255,0.9);
         }
-        
         .compare-table td:first-child {
             background: rgba(0,0,0,0.2);
             font-weight: 600;
             width: 160px;
         }
         
-        .warning {
-            background: rgba(255,193,7,0.15);
-            color: #FFD700;
-            padding: 15px;
-            border-radius: 14px;
-            text-align: center;
-        }
+        .warning { background: rgba(255,193,7,0.15); color: #FFD700; padding: 15px; border-radius: 14px; text-align: center; }
+        .no-data { text-align: center; color: rgba(255,255,255,0.5); padding: 50px; }
         
-        .no-data {
-            text-align: center;
-            color: rgba(255,255,255,0.5);
-            padding: 50px;
-        }
-        
-        /* 统计卡片 */
+        /* 统计卡片 + 数字动画 */
         .stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -452,20 +517,22 @@
         .stat-card {
             background: rgba(255,255,255,0.05);
             backdrop-filter: blur(10px);
-            padding: 22px;
+            padding: 25px;
             text-align: center;
             border-radius: 20px;
             border: 1px solid rgba(255,215,0,0.15);
-            transition: all 0.2s;
+            transition: all 0.3s;
+            cursor: pointer;
         }
         
         .stat-card:hover {
-            transform: translateY(-3px);
-            border-color: rgba(255,215,0,0.4);
+            transform: translateY(-8px);
+            border-color: rgba(255,215,0,0.5);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
         }
         
         .stat-number {
-            font-size: 36px;
+            font-size: 42px;
             font-weight: 800;
             color: #FFD700;
         }
@@ -487,11 +554,7 @@
             border: 1px solid rgba(255,215,0,0.15);
         }
         
-        .applications-card h3 {
-            color: #FFD700;
-            font-size: 24px;
-            margin-bottom: 25px;
-        }
+        .applications-card h3 { color: #FFD700; font-size: 24px; margin-bottom: 25px; }
         
         .apps-grid {
             display: flex;
@@ -507,9 +570,16 @@
             font-weight: 500;
             color: rgba(255,255,255,0.9);
             border: 1px solid rgba(255,215,0,0.2);
+            transition: all 0.3s;
         }
         
-        /* 证书简化区 */
+        .app-tag:hover {
+            background: rgba(255,215,0,0.2);
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+        
+        /* 证书区 */
         .cert-simple {
             background: linear-gradient(135deg, rgba(13,71,161,0.4) 0%, rgba(21,101,192,0.3) 100%);
             backdrop-filter: blur(10px);
@@ -520,11 +590,7 @@
             border: 1px solid rgba(255,215,0,0.2);
         }
         
-        .cert-simple h3 {
-            color: #FFD700;
-            font-size: 22px;
-            margin-bottom: 15px;
-        }
+        .cert-simple h3 { color: #FFD700; font-size: 22px; margin-bottom: 15px; }
         
         .cert-brands {
             display: flex;
@@ -539,6 +605,12 @@
             padding: 8px 24px;
             border-radius: 40px;
             font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .cert-brands span:hover {
+            background: rgba(255,215,0,0.2);
+            transform: scale(1.05);
         }
         
         .cert-link-btn {
@@ -550,31 +622,43 @@
             text-decoration: none;
             font-weight: 700;
             margin-top: 15px;
+            transition: all 0.3s;
         }
         
-        /* 页脚 */
+        .cert-link-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255,215,0,0.3);
+        }
+        
         .footer {
             text-align: center;
             padding: 40px;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255,255,255,0.4);
             font-size: 13px;
             border-top: 1px solid rgba(255,215,0,0.1);
         }
         
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
         @media (max-width: 768px) {
-            .hero-title { font-size: 28px; }
-            .hero-logo { font-size: 36px; }
-            .navbar { flex-direction: column; text-align: center; }
+            .hero-title { font-size: 32px; }
+            .hero-logo { font-size: 36px; letter-spacing: 3px; }
+            .hero-tagline { letter-spacing: 4px; font-size: 12px; }
+            .navbar { flex-direction: column; text-align: center; margin-top: 10px; }
             .stats { grid-template-columns: repeat(2, 1fr); }
             .about-card { padding: 30px 25px; }
             .compare-selectors { flex-direction: column; }
+            .section-title { font-size: 28px; }
         }
     </style>
 </head>
 <body>
     <!-- 视频背景区域 -->
     <div class="hero-section">
-        <video class="hero-video" autoplay muted loop playsinline poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100% 100%'%3E%3Crect width='100%' height='100%' fill='%230a1628'/%3E%3C/svg%3E">
+        <video class="hero-video" autoplay muted loop playsinline>
             <source src="https://assets.mixkit.co/videos/preview/mixkit-factory-machinery-working-38625-large.mp4" type="video/mp4">
         </video>
         <div class="hero-overlay"></div>
@@ -605,8 +689,8 @@
             </div>
         </div>
         
-        <!-- 公司简介 -->
-        <div class="about-card">
+        <!-- 公司简介 - 滚动动画 -->
+        <div class="about-card card-animate" data-aos="fade-up">
             <div class="en-title">—— ABOUT SETSAIL ——</div>
             <h2>东莞市启航塑胶有限公司</h2>
             <p>SETSAIL PLASTICS（启航塑胶）成立于2015年，是一家专注于工程塑料领域的专业贸易与服务商。公司深耕行业近十年，致力于为汽车制造、电子电气、医疗器械、消费品等行业客户提供高品质的工程塑料解决方案。我们与全球顶尖的工程塑料制造商建立了长期稳定的合作关系，拥有日本大赛路、日本T-UMG、德国恩信格三大品牌的官方授权经销资格。以"品质第一，客户至上"为经营理念，常备库存超过74个牌号，服务全国数百家客户。</p>
@@ -621,7 +705,7 @@
         </div>
         
         <!-- 联系方式 -->
-        <div class="contact-bar" id="contact">
+        <div class="contact-bar card-animate" data-aos="fade-up" data-aos-delay="100" id="contact">
             <span class="contact-item">📞 联系人：Shirly</span>
             <span class="contact-item">📱 电话：18925440603</span>
             <span class="contact-item">📧 邮箱：13188269@qq.com</span>
@@ -629,14 +713,14 @@
         </div>
         
         <!-- 快速搜索 -->
-        <div class="search-card">
+        <div class="search-card card-animate" data-aos="fade-up" data-aos-delay="150">
             <h3>🔍 快速搜索牌号</h3>
             <input type="text" id="searchInput" placeholder="输入牌号，如 ZA02111, M90-44, CM-211, PC-1100..." onkeyup="searchGrade()">
             <div id="searchResults" class="search-results"></div>
         </div>
         
         <!-- 产品性能对比 -->
-        <div class="compare-section" id="products">
+        <div class="compare-section card-animate" data-aos="fade-up" data-aos-delay="200" id="products">
             <h3>📊 产品性能对比</h3>
             <div class="compare-selectors">
                 <div class="compare-selector">
@@ -657,16 +741,28 @@
             </div>
         </div>
         
-        <!-- 统计卡片 -->
+        <!-- 统计卡片 + 数字动画 -->
         <div class="stats">
-            <div class="stat-card"><div class="stat-number">74</div><div class="stat-label">常备牌号</div></div>
-            <div class="stat-card"><div class="stat-number">4</div><div class="stat-label">材料种类</div></div>
-            <div class="stat-card"><div class="stat-number">3</div><div class="stat-label">授权品牌</div></div>
-            <div class="stat-card"><div class="stat-number">10年</div><div class="stat-label">行业经验</div></div>
+            <div class="stat-card" id="stat1">
+                <div class="stat-number"><span class="counter" data-target="74">0</span></div>
+                <div class="stat-label">常备牌号</div>
+            </div>
+            <div class="stat-card" id="stat2">
+                <div class="stat-number"><span class="counter" data-target="4">0</span></div>
+                <div class="stat-label">材料种类</div>
+            </div>
+            <div class="stat-card" id="stat3">
+                <div class="stat-number"><span class="counter" data-target="3">0</span></div>
+                <div class="stat-label">授权品牌</div>
+            </div>
+            <div class="stat-card" id="stat4">
+                <div class="stat-number"><span class="counter" data-target="10">0</span><span style="font-size:24px;">年</span></div>
+                <div class="stat-label">行业经验</div>
+            </div>
         </div>
         
         <!-- 产品应用领域 -->
-        <div class="applications-card">
+        <div class="applications-card card-animate" data-aos="fade-up" data-aos-delay="250">
             <h3>🎯 产品应用领域</h3>
             <div class="apps-grid">
                 <span class="app-tag">🚗 汽车制造</span>
@@ -681,7 +777,7 @@
         </div>
         
         <!-- 授权证书简化区 -->
-        <div class="cert-simple">
+        <div class="cert-simple card-animate" data-aos="fade-up" data-aos-delay="300">
             <h3>🏅 官方授权经销商</h3>
             <div class="cert-brands">
                 <span>🇩🇪 德国恩信格</span>
@@ -699,6 +795,58 @@
     </div>
     
     <script>
+        // 数字动画
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200;
+        
+        const animateCounter = (counter) => {
+            const target = parseInt(counter.getAttribute('data-target'));
+            let current = 0;
+            const increment = target / speed;
+            const updateCounter = () => {
+                current += increment;
+                if (current < target) {
+                    counter.innerText = Math.ceil(current);
+                    setTimeout(updateCounter, 20);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            updateCounter();
+        };
+        
+        // 滚动触发数字动画
+        const observerOptions = { threshold: 0.5 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target.querySelector('.counter');
+                    if (counter && counter.innerText === '0') {
+                        animateCounter(counter);
+                    }
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.stat-card').forEach(card => {
+            observer.observe(card);
+        });
+        
+        // AOS初始化
+        AOS.init({ duration: 800, once: true, offset: 100 });
+        
+        // 滚动时导航栏效果
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+        
+        // 数据加载
         let allMaterialsData = {};
         let allMaterialOptions = [];
         
@@ -803,7 +951,7 @@
                     <button onclick="downloadPDF('${gA}','${mA}')" style="background:#FFD700;color:#0a1628;border:none;padding:8px 18px;border-radius:30px;cursor:pointer;font-weight:600;">📄 下载 ${gA} PDF</button>
                     <button onclick="downloadPDF('${gB}','${mB}')" style="background:#FFD700;color:#0a1628;border:none;padding:8px 18px;border-radius:30px;cursor:pointer;margin-left:10px;font-weight:600;">📄 下载 ${gB} PDF</button>
                 </div>
-                <table><tr><th>属性</th><th>${gA} (${mA})</th><th>${gB} (${mB})</th></tr>
+                </table><th>属性</th><th>${gA} (${mA})</th><th>${gB} (${mB})</th></tr>
                 <tr><td>品牌</td><td>${dA.metadata.brand}</td><td>${dB.metadata.brand}</td></tr>
                 <tr><td>基体材料</td><td>${dA.technical_specifications.base_polymer}</td><td>${dB.technical_specifications.base_polymer}</td></tr>
                 <tr><td>增强材料</td><td>${dA.technical_specifications.reinforcement}</td><td>${dB.technical_specifications.reinforcement}</td></tr>
