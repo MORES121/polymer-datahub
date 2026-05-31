@@ -62,6 +62,53 @@
             color: white;
             text-decoration: none;
         }
+        .search-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        .search-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        #searchInput {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        #searchInput:focus {
+            border-color: #667eea;
+        }
+        .search-results {
+            margin-top: 15px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .search-result-item {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+        .search-result-item:hover {
+            background: #f5f5f5;
+        }
+        .search-result-item a {
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 500;
+        }
+        .search-result-item .material-type {
+            font-size: 12px;
+            color: #999;
+            margin-left: 10px;
+        }
         .stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -148,6 +195,13 @@
             <span class="contact-item">💬 微信：18925440603</span>
         </div>
 
+        <!-- 搜索功能 -->
+        <div class="search-card">
+            <h3>🔍 快速搜索牌号</h3>
+            <input type="text" id="searchInput" placeholder="输入牌号名称，如 ZA02111, M90-44, CM-211..." onkeyup="searchGrade()">
+            <div id="searchResults" class="search-results"></div>
+        </div>
+
         <div class="stats">
             <div class="stat-card">
                 <div class="stat-number">74</div>
@@ -209,6 +263,7 @@
         </div>
     </div>
     <script>
+        // 加载材料列表
         async function fetchDataList(material, elementId) {
             const url = `https://api.github.com/repos/MORES121/polymer-datahub/contents/data/${material}`;
             try {
@@ -228,10 +283,61 @@
             }
         }
 
+        // 搜索功能
+        let allMaterials = [];
+
+        async function loadAllMaterials() {
+            const materials = ['ABS', 'POM', 'PMMA', 'PC'];
+            for (const material of materials) {
+                const url = `https://api.github.com/repos/MORES121/polymer-datahub/contents/data/${material}`;
+                try {
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    if (Array.isArray(data)) {
+                        data.filter(file => file.name.endsWith('.json')).forEach(file => {
+                            allMaterials.push({
+                                name: file.name.replace('.json', ''),
+                                material: material,
+                                url: file.download_url
+                            });
+                        });
+                    }
+                } catch (error) {
+                    console.error('加载失败:', material);
+                }
+            }
+        }
+
+        function searchGrade() {
+            const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
+            const resultsDiv = document.getElementById('searchResults');
+            
+            if (keyword.length < 2) {
+                resultsDiv.innerHTML = '';
+                return;
+            }
+            
+            const results = allMaterials.filter(m => m.name.toLowerCase().includes(keyword));
+            
+            if (results.length === 0) {
+                resultsDiv.innerHTML = '<div class="search-result-item">未找到匹配的牌号</div>';
+                return;
+            }
+            
+            resultsDiv.innerHTML = results.map(r => `
+                <div class="search-result-item">
+                    <a href="${r.url}" target="_blank">${r.name}</a>
+                    <span class="material-type">${r.material}</span>
+                </div>
+            `).join('');
+        }
+
+        // 初始化
         fetchDataList('ABS', 'abs-list');
         fetchDataList('POM', 'pom-list');
         fetchDataList('PMMA', 'pmma-list');
         fetchDataList('PC', 'pc-list');
+        loadAllMaterials();
     </script>
 </body>
 </html>
