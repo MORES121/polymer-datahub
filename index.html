@@ -2,7 +2,18 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>启航塑胶·工程塑料数据库 | 牌号对比</title>
+    <meta name="msvalidate.01" content="2016DD51A716F11C2A381D52711BC5D9" />
+    <title>启航塑胶·工程塑料数据库 | 牌号对比 | PDF下载</title>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    <!-- html2pdf 库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         * { box-sizing: border-box; }
         body { font-family: Arial, sans-serif; max-width: 1400px; margin: 0 auto; padding: 20px; background: #f5f5f5; }
@@ -26,6 +37,7 @@
         .compare-table th { background: #667eea; color: white; text-align: center; }
         .compare-table td:first-child { background: #f8f9fa; font-weight: bold; width: 150px; }
         .no-data { text-align: center; color: #999; padding: 40px; }
+        .warning { background: #fff3cd; color: #856404; padding: 10px; border-radius: 5px; margin-bottom: 15px; text-align: center; }
         
         .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; }
         .stat-card { background: white; padding: 20px; text-align: center; border-radius: 10px; }
@@ -34,13 +46,15 @@
         .card { background: white; padding: 20px; border-radius: 10px; }
         .material-link { display: inline-block; background: #e0e0e0; padding: 5px 10px; margin: 3px; border-radius: 15px; text-decoration: none; color: #333; font-size: 12px; }
         .footer { text-align: center; padding: 20px; color: #666; }
+        .pdf-link { color: #11998e; text-decoration: none; font-weight: bold; }
+        .pdf-link:hover { text-decoration: underline; }
         @media (max-width: 768px) { .compare-selectors { flex-direction: column; } }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>🏭 启航塑胶 · 工程塑料数据库</h1>
-        <p>官方发布 | 结构化JSON数据 | 74个牌号 | 支持牌号对比</p>
+        <p>官方发布 | 结构化JSON数据 | 74个牌号 | 支持牌号对比 | 支持PDF下载</p>
     </div>
 
     <div class="contact">
@@ -98,8 +112,10 @@
     </div>
 
     <script>
-        let allMaterialsData = {};  // 存储所有材料的JSON数据
-        let allMaterialOptions = []; // 存储所有牌号选项
+        let allMaterialsData = {};
+        let allMaterialOptions = [];
+        let currentCompareA = '';
+        let currentCompareB = '';
 
         // 加载材料列表显示
         async function loadList(material, elementId) {
@@ -140,7 +156,6 @@
                         for (const file of data.filter(f => f.name.endsWith('.json'))) {
                             const grade = file.name.replace('.json', '');
                             allMaterialOptions.push({ grade: grade, material: m });
-                            // 预加载数据
                             const materialData = await loadMaterialData(grade, m);
                             if (materialData) {
                                 allMaterialsData[`${m}_${grade}`] = materialData;
@@ -149,7 +164,6 @@
                     }
                 } catch(e) {}
             }
-            // 填充下拉菜单
             populateSelects();
         }
 
@@ -158,7 +172,6 @@
             const selectA = document.getElementById('compareA');
             const selectB = document.getElementById('compareB');
             
-            // 按材料分组排序
             allMaterialOptions.sort((a, b) => {
                 if (a.material !== b.material) return a.material.localeCompare(b.material);
                 return a.grade.localeCompare(b.grade);
@@ -186,14 +199,80 @@
             }
         }
 
+        // PDF下载功能
+        async function downloadPDF(grade, material) {
+            const url = `https://raw.githubusercontent.com/MORES121/polymer-datahub/main/data/${material}/${grade}.json`;
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
+                
+                const props = data.technical_specifications.key_properties;
+                const pdfHtml = `
+                    <!DOCTYPE html>
+                    <html>
+                    <head><meta charset="UTF-8"><title>${grade} 技术数据表</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; padding: 40px; }
+                        h1 { color: #11998e; }
+                        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+                        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+                        th { background: #11998e; color: white; }
+                        .footer { margin-top: 30px; font-size: 12px; color: #999; text-align: center; }
+                    </style>
+                    </head>
+                    <body>
+                        <h1>${grade} 技术数据表</h1>
+                        <p><strong>品牌：</strong>${data.metadata.brand}</p>
+                        <p><strong>数据来源：</strong>东莞市启航塑胶有限公司</p>
+                        <table>
+                            <tr><th>属性</th><th>数值</th></tr>
+                            <tr><td>基体材料</td><td>${data.technical_specifications.base_polymer}</td></tr>
+                            <tr><td>增强材料</td><td>${data.technical_specifications.reinforcement}</td></tr>
+                            <tr><td>拉伸强度 (MPa)</td><td>${props.tensile_strength_mpa || '—'}</td></tr>
+                            <tr><td>弯曲模量 (MPa)</td><td>${props.flexural_modulus_mpa || '—'}</td></tr>
+                            <tr><td>冲击强度 (J/m)</td><td>${props.izod_impact_j_m || '—'}</td></tr>
+                            <tr><td>热变形温度 (°C)</td><td>${props.heat_deflection_temp_c || '—'}</td></tr>
+                            <tr><td>阻燃等级</td><td>${props.ul94_rating || '—'}</td></tr>
+                            <tr><td>典型应用</td><td>${data.value_proposition?.typical_applications?.join('、') || '—'}</td></tr>
+                            <tr><td>解决痛点</td><td>${data.value_proposition?.solved_pain_points?.join('、') || '—'}</td></tr>
+                        </table>
+                        <div class="footer">
+                            <p>东莞市启航塑胶有限公司 | 联系人：Shirly | 电话：18925440603</p>
+                            <p>数据最后更新：${data.metadata.last_updated}</p>
+                        </div>
+                    </body>
+                    </html>
+                `;
+                
+                const element = document.createElement('div');
+                element.innerHTML = pdfHtml;
+                document.body.appendChild(element);
+                await html2pdf().from(element).set({ margin: 1, filename: `${grade}_技术数据表.pdf` }).save();
+                document.body.removeChild(element);
+            } catch(e) {
+                alert('PDF生成失败：' + e.message);
+            }
+        }
+
         // 加载对比数据
         async function loadCompareData() {
             const valA = document.getElementById('compareA').value;
             const valB = document.getElementById('compareB').value;
             const resultDiv = document.getElementById('compareResult');
             
+            if (!valA && !valB) {
+                resultDiv.innerHTML = '<div class="no-data">请选择两个牌号进行对比</div>';
+                return;
+            }
+            
             if (!valA || !valB) {
                 resultDiv.innerHTML = '<div class="no-data">请选择两个牌号进行对比</div>';
+                return;
+            }
+            
+            // 防止相同牌号对比
+            if (valA === valB) {
+                resultDiv.innerHTML = '<div class="warning">⚠️ 请选择两个不同的牌号进行对比</div>';
                 return;
             }
             
@@ -217,7 +296,6 @@
                 return;
             }
             
-            // 生成对比表格
             const props = dataA.technical_specifications.key_properties;
             const propsB = dataB.technical_specifications.key_properties;
             
@@ -227,6 +305,10 @@
             };
             
             const html = `
+                <div style="margin-bottom: 10px; text-align: right;">
+                    <button onclick="downloadPDF('${gradeA}', '${materialA}')" style="background:#11998e; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">📄 下载 ${gradeA} PDF</button>
+                    <button onclick="downloadPDF('${gradeB}', '${materialB}')" style="background:#11998e; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer; margin-left:10px;">📄 下载 ${gradeB} PDF</button>
+                </div>
                 <table>
                     <tr>
                         <th>属性</th>
