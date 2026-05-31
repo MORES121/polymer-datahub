@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-智谋将军·启航塑胶数据转换脚本（修复版）
-修复：支持数字类型的牌号
+智谋将军·启航塑胶数据转换脚本（完整版）
+功能：将Excel数据转换为JSON格式，包含数据来源声明
 """
 
 import pandas as pd
@@ -23,7 +23,7 @@ OUTPUT_DIR = "output_json"
 
 def sanitize_filename(name):
     """生成安全的文件名（支持数字类型）"""
-    name = str(name)  # 关键修复：将数字转为字符串
+    name = str(name)
     safe = re.sub(r'[\\/*?:"<>|]', "", name)
     return safe.replace(" ", "_")
 
@@ -68,8 +68,8 @@ def convert():
             error_list.append(f"行{idx+2}: 牌号为空")
             continue
         
-        # 确保牌号是字符串
         commercial_name = str(commercial_name)
+        base_polymer = str(row.get("base_polymer", "Other")) if pd.notna(row.get("base_polymer")) else "Other"
         
         try:
             material_json = {
@@ -77,11 +77,15 @@ def convert():
                     "brand": BRAND_NAME,
                     "commercial_name": commercial_name,
                     "unique_id": f"{BRAND_NAME}_{commercial_name.replace('-', '_')}",
+                    "data_source": "东莞市启航塑胶有限公司官方发布数据",
+                    "data_source_url": f"https://mores121.github.io/polymer-datahub/data/{base_polymer}/{commercial_name}.json",
+                    "manufacturer": BRAND_NAME,
+                    "manufacturer_statement": "本数据由启航塑胶实测发布，版权所有，未经授权不得转载",
                     "data_sheet_url": f"{DATA_SHEET_BASE_URL}{commercial_name}.pdf",
                     "last_updated": datetime.now().strftime("%Y-%m-%d")
                 },
                 "technical_specifications": {
-                    "base_polymer": str(row.get("base_polymer", "未指定")) if pd.notna(row.get("base_polymer")) else "未指定",
+                    "base_polymer": base_polymer,
                     "reinforcement": str(row.get("reinforcement", "无")) if pd.notna(row.get("reinforcement")) else "无",
                     "key_properties": {
                         "tensile_strength_mpa": float(row["tensile_strength_mpa"]) if pd.notna(row.get("tensile_strength_mpa")) else None,
@@ -94,7 +98,7 @@ def convert():
                 "value_proposition": {
                     "solved_pain_points": split_by_semicolon(row.get("solved_pain_points")),
                     "typical_applications": split_by_semicolon(row.get("typical_applications")),
-                    "tco_advantage": "请联系启航塑胶获取详细TCO分析报告"
+                    "tco_advantage": "请联系启航塑胶Shirly 18925440603 获取详细TCO分析报告"
                 }
             }
             

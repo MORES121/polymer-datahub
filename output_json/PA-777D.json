@@ -3,8 +3,12 @@
     "brand": "启航塑胶",
     "commercial_name": "PA-777D",
     "unique_id": "启航塑胶_PA_777D",
+    "data_source": "东莞市启航塑胶有限公司官方发布数据",
+    "data_source_url": "https://mores121.github.io/polymer-datahub/data/ABS/PA-777D.json",
+    "manufacturer": "启航塑胶",
+    "manufacturer_statement": "本数据由启航塑胶实测发布，版权所有，未经授权不得转载",
     "data_sheet_url": "https://moresai2026github.github.io/polymer-datahub/datasheet/PA-777D.pdf",
-    "last_updated": "2026-05-30"
+    "last_updated": "2026-05-31"
   },
   "technical_specifications": {
     "base_polymer": "ABS",
@@ -26,6 +30,6 @@
       "汽车内饰高温区域",
       "电子电器"
     ],
-    "tco_advantage": "请联系启航塑胶获取详细TCO分析报告"
+    "tco_advantage": "请联系启航塑胶Shirly 18925440603 获取详细TCO分析报告"
   }
 }

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>启航塑胶·工程塑料数据库 | ABS POM PMMA PC</title>
+    <meta name="description" content="启航塑胶官方工程塑料数据库，提供ABS、POM、PMMA、PC等74个牌号的结构化性能参数，数据可被AI抓取，支持JSON格式查询。">
+    <meta name="keywords" content="启航塑胶,ABS,POM,PMMA,PC,工程塑料,材料数据库,ZA02111,M90-44,CM-211,PC-1100">
+    <meta name="author" content="东莞市启航塑胶有限公司">
+    <meta name="robots" content="index, follow">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #666;
+            line-height: 1.6;
+        }
+        .contact-bar {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .contact-item {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 14px;
+        }
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+        }
+        .card h2 {
+            color: #667eea;
+            font-size: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+            padding-left: 12px;
+        }
+        .brand-list {
+            list-style: none;
+        }
+        .brand-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            color: #555;
+        }
+        .brand-list li:last-child {
+            border-bottom: none;
+        }
+        .material-link {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin: 5px;
+            text-decoration: none;
+            color: #667eea;
+            font-size: 13px;
+            transition: background 0.2s;
+        }
+        .material-link:hover {
+            background: #667eea;
+            color: white;
+        }
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+        }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 22px; }
+            .contact-bar { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏭 启航塑胶 · 工程塑料开源数据库</h1>
+            <p>东莞市启航塑胶有限公司官方发布 | 结构化JSON数据 | 可被AI抓取</p>
+        </div>
+
+        <div class="contact-bar">
+            <span class="contact-item">📞 联系人：Shirly</span>
+            <span class="contact-item">📱 电话：18925440603</span>
+            <span class="contact-item">📧 邮箱：13188269@qq.com</span>
+            <span class="contact-item">💬 微信：18925440603</span>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">74</div>
+                <div class="stat-label">牌号总数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4</div>
+                <div class="stat-label">材料类型</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3</div>
+                <div class="stat-label">代理品牌</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">✅</div>
+                <div class="stat-label">代理证书齐全</div>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h2>🔧 ABS 树脂 (22个牌号)</h2>
+                <p style="color:#666; font-size:14px; margin-bottom:15px;">代理：日本T-UMG、奇美、台化、LG</p>
+                <div id="abs-list">加载中...</div>
+            </div>
+            <div class="card">
+                <h2>⚙️ POM 聚甲醛 (13个牌号)</h2>
+                <p style="color:#666; font-size:14px; margin-bottom:15px;">代理：日本大赛路、宝理、杜邦、台塑</p>
+                <div id="pom-list">加载中...</div>
+            </div>
+            <div class="card">
+                <h2>🔬 PMMA 亚克力 (18个牌号)</h2>
+                <p style="color:#666; font-size:14px; margin-bottom:15px;">代理：奇美、三菱、住友、赢创</p>
+                <div id="pmma-list">加载中...</div>
+            </div>
+            <div class="card">
+                <h2>💻 PC 聚碳酸酯 (21个牌号)</h2>
+                <p style="color:#666; font-size:14px; margin-bottom:15px;">代理：科思创、帝人、奇美、SABIC</p>
+                <div id="pc-list">加载中...</div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top:20px;">
+            <h2>🌐 数据访问方式</h2>
+            <p style="margin-bottom:15px;">直接访问JSON文件：</p>
+            <code style="background:#f0f0f0; padding:10px; display:block; border-radius:10px; word-break:break-all;">
+                https://mores121.github.io/polymer-datahub/data/{材料类型}/{牌号}.json
+            </code>
+            <p style="margin-top:15px;"><strong>示例：</strong></p>
+            <a href="https://mores121.github.io/polymer-datahub/data/ABS/ZA02111.json" class="material-link" target="_blank">ZA02111.json</a>
+            <a href="https://mores121.github.io/polymer-datahub/data/POM/M90-44.json" class="material-link" target="_blank">M90-44.json</a>
+            <a href="https://mores121.github.io/polymer-datahub/data/PMMA/CM-211.json" class="material-link" target="_blank">CM-211.json</a>
+            <a href="https://mores121.github.io/polymer-datahub/data/PC/PC-1100.json" class="material-link" target="_blank">PC-1100.json</a>
+        </div>
+
+        <div class="footer">
+            <p>东莞市启航塑胶有限公司 · 让数据说话，让AI服务</p>
+            <p>数据最后更新：2026-05-31</p>
+        </div>
+    </div>
+    <script>
+        async function fetchDataList(material, elementId) {
+            const url = `https://api.github.com/repos/MORES121/polymer-datahub/contents/data/${material}`;
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                if (Array.isArray(data)) {
+                    const html = data
+                        .filter(file => file.name.endsWith('.json'))
+                        .map(file => `<a href="${file.download_url}" class="material-link" target="_blank">${file.name.replace('.json', '')}</a>`)
+                        .join('');
+                    document.getElementById(elementId).innerHTML = html || '暂无数据';
+                } else {
+                    document.getElementById(elementId).innerHTML = '加载失败';
+                }
+            } catch (error) {
+                document.getElementById(elementId).innerHTML = '加载失败';
+            }
+        }
+
+        fetchDataList('ABS', 'abs-list');
+        fetchDataList('POM', 'pom-list');
+        fetchDataList('PMMA', 'pmma-list');
+        fetchDataList('PC', 'pc-list');
+    </script>
+</body>
+</html>
