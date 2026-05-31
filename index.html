@@ -3,143 +3,635 @@
 <head>
     <meta charset="UTF-8">
     <meta name="msvalidate.01" content="2016DD51A716F11C2A381D52711BC5D9" />
-    <title>启航塑胶·工程塑料数据库 | 牌号对比 | PDF下载</title>
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-XXXXXXXXXX');
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>启航塑胶 | 工程塑料专家 | ABS POM PMMA PC 授权经销商</title>
+    <meta name="description" content="启航塑胶-日本大赛路、日本T-UMG、德国恩信格官方授权经销商，提供ABS、POM、PMMA、PC等工程塑料，支持性能对比、PDF下载。">
+    <meta name="keywords" content="启航塑胶,ABS,POM,PMMA,PC,工程塑料,日本大赛路,日本T-UMG,德国恩信格">
+    <meta name="author" content="东莞市启航塑胶有限公司">
+    <meta name="robots" content="index, follow">
+    <!-- 字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- html2pdf 库 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
-        * { box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; max-width: 1400px; margin: 0 auto; padding: 20px; background: #f5f5f5; }
-        .header { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
-        .contact { background: #11998e; color: white; padding: 15px; border-radius: 10px; margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 15px; }
-        .search-box { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
-        #searchInput { width: 100%; padding: 12px; font-size: 16px; border: 2px solid #ddd; border-radius: 25px; }
-        .search-results { margin-top: 15px; max-height: 200px; overflow-y: auto; }
-        .result-item { padding: 8px; border-bottom: 1px solid #eee; cursor: pointer; }
-        .result-item:hover { background: #f0f0f0; }
-        .result-item a { color: #667eea; text-decoration: none; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(180deg, #f8f9fc 0%, #f1f3f9 100%);
+            min-height: 100vh;
+            color: #1a1a2e;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 导航栏 */
+        .navbar {
+            background: white;
+            border-radius: 20px;
+            padding: 15px 30px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+        
+        .logo h1 {
+            font-size: 22px;
+            color: #11998e;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo p {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: #11998e;
+        }
+        
+        /* 公司简介卡片 */
+        .about-card {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            border-radius: 24px;
+            padding: 35px;
+            margin-bottom: 25px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(17,153,142,0.2);
+        }
+        
+        .about-card h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .about-card p {
+            line-height: 1.8;
+            opacity: 0.95;
+            margin-bottom: 20px;
+        }
+        
+        .about-stats {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+        
+        .about-stats .stat {
+            background: rgba(255,255,255,0.2);
+            padding: 12px 20px;
+            border-radius: 40px;
+            backdrop-filter: blur(10px);
+        }
+        
+        /* 联系方式栏 */
+        .contact-bar {
+            background: white;
+            border-radius: 16px;
+            padding: 20px 25px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            border: 1px solid #eef2f7;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #444;
+        }
+        
+        .contact-item a {
+            color: #11998e;
+            text-decoration: none;
+        }
+        
+        /* 搜索框 */
+        .search-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            border: 1px solid #eef2f7;
+        }
+        
+        .search-card h3 {
+            color: #1a1a2e;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        #searchInput {
+            width: 100%;
+            padding: 14px 20px;
+            font-size: 16px;
+            border: 2px solid #e8ecf1;
+            border-radius: 50px;
+            outline: none;
+            transition: all 0.2s;
+        }
+        
+        #searchInput:focus {
+            border-color: #11998e;
+            box-shadow: 0 0 0 3px rgba(17,153,142,0.1);
+        }
+        
+        .search-results {
+            margin-top: 20px;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        
+        .result-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+        
+        .result-item:hover {
+            background: #f8f9fc;
+        }
+        
+        .result-item a {
+            text-decoration: none;
+            color: #11998e;
+            font-weight: 500;
+        }
         
         /* 对比区域 */
-        .compare-section { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
-        .compare-selectors { display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
-        .compare-selector { flex: 1; min-width: 200px; }
-        .compare-selector select { width: 100%; padding: 10px; font-size: 14px; border: 2px solid #ddd; border-radius: 10px; }
-        .compare-table { overflow-x: auto; }
-        .compare-table table { width: 100%; border-collapse: collapse; }
-        .compare-table th, .compare-table td { border: 1px solid #ddd; padding: 10px; text-align: left; vertical-align: top; }
-        .compare-table th { background: #667eea; color: white; text-align: center; }
-        .compare-table td:first-child { background: #f8f9fa; font-weight: bold; width: 150px; }
-        .no-data { text-align: center; color: #999; padding: 40px; }
-        .warning { background: #fff3cd; color: #856404; padding: 10px; border-radius: 5px; margin-bottom: 15px; text-align: center; }
+        .compare-section {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            border: 1px solid #eef2f7;
+        }
         
-        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; }
-        .stat-card { background: white; padding: 20px; text-align: center; border-radius: 10px; }
-        .stat-number { font-size: 32px; font-weight: bold; color: #667eea; }
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-        .card { background: white; padding: 20px; border-radius: 10px; }
-        .material-link { display: inline-block; background: #e0e0e0; padding: 5px 10px; margin: 3px; border-radius: 15px; text-decoration: none; color: #333; font-size: 12px; }
-        .footer { text-align: center; padding: 20px; color: #666; }
-        .pdf-link { color: #11998e; text-decoration: none; font-weight: bold; }
-        .pdf-link:hover { text-decoration: underline; }
-        @media (max-width: 768px) { .compare-selectors { flex-direction: column; } }
+        .compare-section h3 {
+            color: #1a1a2e;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .compare-selectors {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .compare-selector {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .compare-selector label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .compare-selector select {
+            width: 100%;
+            padding: 12px;
+            font-size: 14px;
+            border: 2px solid #e8ecf1;
+            border-radius: 12px;
+            outline: none;
+            background: white;
+            cursor: pointer;
+        }
+        
+        .compare-selector select:focus {
+            border-color: #11998e;
+        }
+        
+        .compare-table {
+            overflow-x: auto;
+        }
+        
+        .compare-table table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        
+        .compare-table th {
+            background: #11998e;
+            color: white;
+            padding: 14px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .compare-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eef2f7;
+        }
+        
+        .compare-table td:first-child {
+            background: #f8f9fc;
+            font-weight: 600;
+            width: 160px;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .no-data {
+            text-align: center;
+            color: #999;
+            padding: 40px;
+        }
+        
+        /* 统计卡片 */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            border: 1px solid #eef2f7;
+            transition: transform 0.2s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #11998e;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        /* 产品网格 */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            border: 1px solid #eef2f7;
+            transition: all 0.2s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        
+        .product-card h3 {
+            color: #11998e;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .product-card .brand {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 15px;
+        }
+        
+        .product-card .grade-list {
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        
+        .material-link {
+            display: inline-block;
+            background: #f0f4f8;
+            padding: 6px 12px;
+            margin: 4px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: #444;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+        
+        .material-link:hover {
+            background: #11998e;
+            color: white;
+        }
+        
+        /* 证书区域 */
+        .cert-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 24px;
+            margin-bottom: 25px;
+            color: white;
+            text-align: center;
+        }
+        
+        .cert-section h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        
+        .cert-grid {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin: 25px 0;
+        }
+        
+        .cert-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 20px 30px;
+            border-radius: 20px;
+            text-align: center;
+            min-width: 150px;
+            transition: transform 0.2s;
+        }
+        
+        .cert-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.25);
+        }
+        
+        .cert-card .flag {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        
+        .cert-card .brand-name {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .cert-card .cert-link {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 6px 16px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        .cert-note {
+            font-size: 13px;
+            opacity: 0.9;
+            margin-top: 15px;
+        }
+        
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #888;
+            font-size: 13px;
+            border-top: 1px solid #eef2f7;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            .compare-selectors {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>🏭 启航塑胶 · 工程塑料数据库</h1>
-        <p>官方发布 | 结构化JSON数据 | 74个牌号 | 支持牌号对比 | 支持PDF下载</p>
-    </div>
-
-    <div class="contact">
-        <span>📞 联系人：Shirly</span>
-        <span>📱 电话：18925440603</span>
-        <span>📧 邮箱：13188269@qq.com</span>
-        <span>💬 微信：18925440603</span>
-    <!-- 证书展示区 -->
-<!-- 证书展示区 - 美化版 -->
-<div class="cert-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 15px; margin-bottom: 20px; color: white;">
-    <h3 style="margin: 0 0 15px 0; font-size: 20px;">🏅 官方授权经销商证书</h3>
-    <p style="margin: 0 0 15px 0; opacity: 0.9; font-size: 14px;">启航塑胶为以下品牌官方授权经销商，证书真实有效</p>
-    <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
-        <div style="text-align: center; background: rgba(255,255,255,0.15); padding: 15px 25px; border-radius: 12px; backdrop-filter: blur(10px); min-width: 140px;">
-            <div style="font-size: 36px;">🇩🇪</div>
-            <div style="font-weight: bold; margin: 8px 0;">德国恩信格</div>
-            <a href="./certificates/certificate-ensinger.jpg" target="_blank" style="display: inline-block; margin-top: 8px; background: white; color: #667eea; padding: 5px 15px; border-radius: 20px; text-decoration: none; font-size: 12px; font-weight: bold;">查看证书 →</a>
-        </div>
-        <div style="text-align: center; background: rgba(255,255,255,0.15); padding: 15px 25px; border-radius: 12px; backdrop-filter: blur(10px); min-width: 140px;">
-            <div style="font-size: 36px;">🇯🇵</div>
-            <div style="font-weight: bold; margin: 8px 0;">日本大赛路</div>
-            <a href="./certificates/certificate-daisel.jpg" target="_blank" style="display: inline-block; margin-top: 8px; background: white; color: #667eea; padding: 5px 15px; border-radius: 20px; text-decoration: none; font-size: 12px; font-weight: bold;">查看证书 →</a>
-        </div>
-        <div style="text-align: center; background: rgba(255,255,255,0.15); padding: 15px 25px; border-radius: 12px; backdrop-filter: blur(10px); min-width: 140px;">
-            <div style="font-size: 36px;">🇯🇵</div>
-            <div style="font-weight: bold; margin: 8px 0;">日本T-UMG</div>
-            <a href="./certificates/certificate-umg.jpg" target="_blank" style="display: inline-block; margin-top: 8px; background: white; color: #667eea; padding: 5px 15px; border-radius: 20px; text-decoration: none; font-size: 12px; font-weight: bold;">查看证书 →</a>
-        </div>
-    </div>
-    <p style="text-align: center; margin-top: 20px; opacity: 0.8; font-size: 12px;">✅ 官方授权 · 十年信誉 · 假一赔十</p>
-</div>
-    <div class="search-box">
-        <h3>🔍 快速搜索牌号</h3>
-        <input type="text" id="searchInput" placeholder="输入牌号，如 ZA02111, M90-44..." onkeyup="searchGrade()">
-        <div id="searchResults" class="search-results"></div>
-    </div>
-
-    <!-- 对比区域 -->
-    <div class="compare-section">
-        <h3>📊 牌号性能对比</h3>
-        <div class="compare-selectors">
-            <div class="compare-selector">
-                <label>选择牌号 A：</label>
-                <select id="compareA" onchange="loadCompareData()">
-                    <option value="">-- 请选择牌号 --</option>
-                </select>
+    <div class="container">
+        <!-- 导航栏 -->
+        <div class="navbar">
+            <div class="logo">
+                <h1>🏭 启航塑胶</h1>
+                <p>工程塑料 · 授权经销商</p>
             </div>
-            <div class="compare-selector">
-                <label>选择牌号 B：</label>
-                <select id="compareB" onchange="loadCompareData()">
-                    <option value="">-- 请选择牌号 --</option>
-                </select>
+            <div class="nav-links">
+                <a href="#">首页</a>
+                <a href="#products">产品中心</a>
+                <a href="#compare">性能对比</a>
+                <a href="#certificates">授权证书</a>
+                <a href="#contact">联系我们</a>
             </div>
         </div>
-        <div id="compareResult" class="compare-table">
-            <div class="no-data">请选择两个牌号进行对比</div>
+        
+        <!-- 公司简介 -->
+        <div class="about-card">
+            <h2>🏆 东莞市启航塑胶有限公司</h2>
+            <p>启航塑胶成立于2015年，是一家专注于工程塑料领域的专业贸易与服务商。公司深耕行业近十年，致力于为汽车、电子电气、医疗器械、消费品等行业客户提供高品质的工程塑料解决方案。</p>
+            <div class="about-stats">
+                <span class="stat">📅 10年行业经验</span>
+                <span class="stat">🏭 3大官方授权品牌</span>
+                <span class="stat">📦 74+ 常备库存牌号</span>
+                <span class="stat">🌍 服务全国客户</span>
+            </div>
+        </div>
+        
+        <!-- 联系方式 -->
+        <div class="contact-bar" id="contact">
+            <span class="contact-item">📞 联系人：Shirly</span>
+            <span class="contact-item">📱 电话：18925440603</span>
+            <span class="contact-item">📧 邮箱：13188269@qq.com</span>
+            <span class="contact-item">💬 微信：18925440603</span>
+        </div>
+        
+        <!-- 搜索框 -->
+        <div class="search-card">
+            <h3>🔍 快速搜索牌号</h3>
+            <input type="text" id="searchInput" placeholder="输入牌号，如 ZA02111, M90-44, CM-211..." onkeyup="searchGrade()">
+            <div id="searchResults" class="search-results"></div>
+        </div>
+        
+        <!-- 对比区域 -->
+        <div class="compare-section" id="compare">
+            <h3>📊 产品性能对比</h3>
+            <div class="compare-selectors">
+                <div class="compare-selector">
+                    <label>选择牌号 A：</label>
+                    <select id="compareA" onchange="loadCompareData()">
+                        <option value="">-- 请选择牌号 --</option>
+                    </select>
+                </div>
+                <div class="compare-selector">
+                    <label>选择牌号 B：</label>
+                    <select id="compareB" onchange="loadCompareData()">
+                        <option value="">-- 请选择牌号 --</option>
+                    </select>
+                </div>
+            </div>
+            <div id="compareResult" class="compare-table">
+                <div class="no-data">请选择两个牌号进行对比</div>
+            </div>
+        </div>
+        
+        <!-- 统计卡片 -->
+        <div class="stats">
+            <div class="stat-card"><div class="stat-number">74</div><div class="stat-label">常备牌号</div></div>
+            <div class="stat-card"><div class="stat-number">4</div><div class="stat-label">材料种类</div></div>
+            <div class="stat-card"><div class="stat-number">3</div><div class="stat-label">授权品牌</div></div>
+            <div class="stat-card"><div class="stat-number">10年</div><div class="stat-label">行业经验</div></div>
+        </div>
+        
+        <!-- 产品中心 -->
+        <div class="products-grid" id="products">
+            <div class="product-card">
+                <h3>🔧 ABS 树脂</h3>
+                <div class="brand">代理：日本T-UMG、奇美、台化、LG</div>
+                <div class="grade-list" id="abs-list">加载中...</div>
+            </div>
+            <div class="product-card">
+                <h3>⚙️ POM 聚甲醛</h3>
+                <div class="brand">代理：日本大赛路、宝理、杜邦、台塑</div>
+                <div class="grade-list" id="pom-list">加载中...</div>
+            </div>
+            <div class="product-card">
+                <h3>🔬 PMMA 亚克力</h3>
+                <div class="brand">代理：奇美、三菱、住友、赢创</div>
+                <div class="grade-list" id="pmma-list">加载中...</div>
+            </div>
+            <div class="product-card">
+                <h3>💻 PC 聚碳酸酯</h3>
+                <div class="brand">代理：科思创、帝人、奇美、SABIC</div>
+                <div class="grade-list" id="pc-list">加载中...</div>
+            </div>
+        </div>
+        
+        <!-- 应用领域 -->
+        <div class="about-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+            <h2>🎯 产品应用领域</h2>
+            <p>启航塑胶的工程塑料产品广泛应用于以下领域，为客户提供高性能材料解决方案。</p>
+            <div class="about-stats">
+                <span class="stat">🚗 汽车制造</span>
+                <span class="stat">📱 电子电气</span>
+                <span class="stat">🏥 医疗器械</span>
+                <span class="stat">🏠 家电日用品</span>
+                <span class="stat">🔧 工业机械</span>
+                <span class="stat">✈️ 航空航天</span>
+            </div>
+        </div>
+        
+        <!-- 证书区域 -->
+        <div class="cert-section" id="certificates">
+            <h3>🏅 官方授权经销商证书</h3>
+            <p>启航塑胶为以下品牌官方授权经销商，证书真实有效</p>
+            <div class="cert-grid">
+                <div class="cert-card">
+                    <div class="flag">🇩🇪</div>
+                    <div class="brand-name">德国恩信格</div>
+                    <div class="brand-desc">Ensinger</div>
+                    <a href="./certificates/certificate-ensinger.jpg" target="_blank" class="cert-link">查看证书 →</a>
+                </div>
+                <div class="cert-card">
+                    <div class="flag">🇯🇵</div>
+                    <div class="brand-name">日本大赛路</div>
+                    <div class="brand-desc">Daisel</div>
+                    <a href="./certificates/certificate-daisel.jpg" target="_blank" class="cert-link">查看证书 →</a>
+                </div>
+                <div class="cert-card">
+                    <div class="flag">🇯🇵</div>
+                    <div class="brand-name">日本T-UMG</div>
+                    <div class="brand-desc">A&L</div>
+                    <a href="./certificates/certificate-umg.jpg" target="_blank" class="cert-link">查看证书 →</a>
+                </div>
+            </div>
+            <div class="cert-note">✅ 官方授权 · 十年信誉 · 假一赔十</div>
+        </div>
+        
+        <!-- 页脚 -->
+        <div class="footer">
+            <p>东莞市启航塑胶有限公司 · 让数据说话，让AI服务</p>
+            <p>数据最后更新：2026-05-31 | 代理品牌：日本大赛路 | 日本T-UMG | 德国恩信格</p>
         </div>
     </div>
-
-    <div class="stats">
-        <div class="stat-card"><div class="stat-number">74</div><div>牌号总数</div></div>
-        <div class="stat-card"><div class="stat-number">4</div><div>材料类型</div></div>
-        <div class="stat-card"><div class="stat-number">3</div><div>代理品牌</div></div>
-        <div class="stat-card"><div class="stat-number">✅</div><div>代理证书</div></div>
-    </div>
-
-    <div class="grid">
-        <div class="card"><h2>🔧 ABS (22个)</h2><div id="abs-list">加载中...</div></div>
-        <div class="card"><h2>⚙️ POM (13个)</h2><div id="pom-list">加载中...</div></div>
-        <div class="card"><h2>🔬 PMMA (18个)</h2><div id="pmma-list">加载中...</div></div>
-        <div class="card"><h2>💻 PC (21个)</h2><div id="pc-list">加载中...</div></div>
-    </div>
-
-    <div class="footer">
-        <p>东莞市启航塑胶有限公司 · 数据最后更新：2026-05-31</p>
-        <p>代理品牌：日本大赛路 | 日本T-UMG | 德国恩信格</p>
-    </div>
-
+    
     <script>
         let allMaterialsData = {};
         let allMaterialOptions = [];
-        let currentCompareA = '';
-        let currentCompareB = '';
-
-        // 加载材料列表显示
+        
+        // 加载材料列表
         async function loadList(material, elementId) {
             const url = `https://api.github.com/repos/MORES121/polymer-datahub/contents/data/${material}`;
             try {
@@ -152,21 +644,18 @@
                 }
             } catch(e) { document.getElementById(elementId).innerHTML = '加载失败'; }
         }
-
-        // 加载单个牌号的JSON数据
+        
+        // 加载单个牌号数据
         async function loadMaterialData(grade, material) {
             const url = `https://raw.githubusercontent.com/MORES121/polymer-datahub/main/data/${material}/${grade}.json`;
             try {
                 const res = await fetch(url);
-                if (res.ok) {
-                    const data = await res.json();
-                    return data;
-                }
+                if (res.ok) return await res.json();
             } catch(e) {}
             return null;
         }
-
-        // 加载所有牌号用于下拉菜单
+        
+        // 加载所有牌号
         async function loadAllForCompare() {
             const materials = ['ABS', 'POM', 'PMMA', 'PC'];
             for (const m of materials) {
@@ -179,32 +668,24 @@
                             const grade = file.name.replace('.json', '');
                             allMaterialOptions.push({ grade: grade, material: m });
                             const materialData = await loadMaterialData(grade, m);
-                            if (materialData) {
-                                allMaterialsData[`${m}_${grade}`] = materialData;
-                            }
+                            if (materialData) allMaterialsData[`${m}_${grade}`] = materialData;
                         }
                     }
                 } catch(e) {}
             }
             populateSelects();
         }
-
-        // 填充对比下拉菜单
+        
+        // 填充下拉菜单
         function populateSelects() {
             const selectA = document.getElementById('compareA');
             const selectB = document.getElementById('compareB');
-            
-            allMaterialOptions.sort((a, b) => {
-                if (a.material !== b.material) return a.material.localeCompare(b.material);
-                return a.grade.localeCompare(b.grade);
-            });
-            
+            allMaterialOptions.sort((a, b) => a.material.localeCompare(b.material) || a.grade.localeCompare(b.grade));
             const grouped = {};
             for (const opt of allMaterialOptions) {
                 if (!grouped[opt.material]) grouped[opt.material] = [];
                 grouped[opt.material].push(opt.grade);
             }
-            
             for (const select of [selectA, selectB]) {
                 select.innerHTML = '<option value="">-- 请选择牌号 --</option>';
                 for (const [material, grades] of Object.entries(grouped)) {
@@ -220,139 +701,74 @@
                 }
             }
         }
-
-        // PDF下载功能
+        
+        // PDF下载
         async function downloadPDF(grade, material) {
-            const url = `https://raw.githubusercontent.com/MORES121/polymer-datahub/main/data/${material}/${grade}.json`;
-            try {
-                const res = await fetch(url);
-                const data = await res.json();
-                
-                const props = data.technical_specifications.key_properties;
-                const pdfHtml = `
-                    <!DOCTYPE html>
-                    <html>
-                    <head><meta charset="UTF-8"><title>${grade} 技术数据表</title>
-                    <style>
-                        body { font-family: Arial, sans-serif; padding: 40px; }
-                        h1 { color: #11998e; }
-                        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-                        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
-                        th { background: #11998e; color: white; }
-                        .footer { margin-top: 30px; font-size: 12px; color: #999; text-align: center; }
-                    </style>
-                    </head>
-                    <body>
-                        <h1>${grade} 技术数据表</h1>
-                        <p><strong>品牌：</strong>${data.metadata.brand}</p>
-                        <p><strong>数据来源：</strong>东莞市启航塑胶有限公司</p>
-                        <table>
-                            <tr><th>属性</th><th>数值</th></tr>
-                            <tr><td>基体材料</td><td>${data.technical_specifications.base_polymer}</td></tr>
-                            <tr><td>增强材料</td><td>${data.technical_specifications.reinforcement}</td></tr>
-                            <tr><td>拉伸强度 (MPa)</td><td>${props.tensile_strength_mpa || '—'}</td></tr>
-                            <tr><td>弯曲模量 (MPa)</td><td>${props.flexural_modulus_mpa || '—'}</td></tr>
-                            <tr><td>冲击强度 (J/m)</td><td>${props.izod_impact_j_m || '—'}</td></tr>
-                            <tr><td>热变形温度 (°C)</td><td>${props.heat_deflection_temp_c || '—'}</td></tr>
-                            <tr><td>阻燃等级</td><td>${props.ul94_rating || '—'}</td></tr>
-                            <tr><td>典型应用</td><td>${data.value_proposition?.typical_applications?.join('、') || '—'}</td></tr>
-                            <tr><td>解决痛点</td><td>${data.value_proposition?.solved_pain_points?.join('、') || '—'}</td></tr>
-                        </table>
-                        <div class="footer">
-                            <p>东莞市启航塑胶有限公司 | 联系人：Shirly | 电话：18925440603</p>
-                            <p>数据最后更新：${data.metadata.last_updated}</p>
-                        </div>
-                    </body>
-                    </html>
-                `;
-                
-                const element = document.createElement('div');
-                element.innerHTML = pdfHtml;
-                document.body.appendChild(element);
-                await html2pdf().from(element).set({ margin: 1, filename: `${grade}_技术数据表.pdf` }).save();
-                document.body.removeChild(element);
-            } catch(e) {
-                alert('PDF生成失败：' + e.message);
-            }
+            const data = allMaterialsData[`${material}_${grade}`];
+            if (!data) { alert('数据加载失败'); return; }
+            const props = data.technical_specifications.key_properties;
+            const pdfHtml = `
+                <!DOCTYPE html><html><head><meta charset="UTF-8"><title>${grade} 技术数据表</title>
+                <style>body{font-family:Arial;padding:40px;} h1{color:#11998e;} table{width:100%;border-collapse:collapse;} th,td{border:1px solid #ddd;padding:10px;} th{background:#11998e;color:white;} .footer{margin-top:30px;font-size:12px;color:#999;text-align:center;}</style>
+                </head><body><h1>${grade} 技术数据表</h1>
+                <p><strong>品牌：</strong>${data.metadata.brand}</p><p><strong>数据来源：</strong>东莞市启航塑胶有限公司</p>
+                <table><tr><th>属性</th><th>数值</th></tr>
+                <tr><td>基体材料</td><td>${data.technical_specifications.base_polymer}</td></tr>
+                <tr><td>增强材料</td><td>${data.technical_specifications.reinforcement}</td></tr>
+                <tr><td>拉伸强度 (MPa)</td><td>${props.tensile_strength_mpa || '—'}</td></tr>
+                <tr><td>弯曲模量 (MPa)</td><td>${props.flexural_modulus_mpa || '—'}</td></tr>
+                <tr><td>冲击强度 (J/m)</td><td>${props.izod_impact_j_m || '—'}</td></tr>
+                <tr><td>热变形温度 (°C)</td><td>${props.heat_deflection_temp_c || '—'}</td></tr>
+                <tr><td>阻燃等级</td><td>${props.ul94_rating || '—'}</td></tr>
+                <tr><td>典型应用</td><td>${data.value_proposition?.typical_applications?.join('、') || '—'}</td></tr>
+                </table>
+                <div class="footer"><p>东莞市启航塑胶有限公司 | 联系人：Shirly | 电话：18925440603</p></div>
+                </body></html>
+            `;
+            const element = document.createElement('div');
+            element.innerHTML = pdfHtml;
+            document.body.appendChild(element);
+            await html2pdf().from(element).set({ margin: 1, filename: `${grade}_技术数据表.pdf` }).save();
+            document.body.removeChild(element);
         }
-
+        
         // 加载对比数据
         async function loadCompareData() {
             const valA = document.getElementById('compareA').value;
             const valB = document.getElementById('compareB').value;
             const resultDiv = document.getElementById('compareResult');
-            
-            if (!valA && !valB) {
-                resultDiv.innerHTML = '<div class="no-data">请选择两个牌号进行对比</div>';
-                return;
-            }
-            
-            if (!valA || !valB) {
-                resultDiv.innerHTML = '<div class="no-data">请选择两个牌号进行对比</div>';
-                return;
-            }
-            
-            // 防止相同牌号对比
-            if (valA === valB) {
-                resultDiv.innerHTML = '<div class="warning">⚠️ 请选择两个不同的牌号进行对比</div>';
-                return;
-            }
-            
+            if (!valA || !valB) { resultDiv.innerHTML = '<div class="no-data">请选择两个牌号进行对比</div>'; return; }
+            if (valA === valB) { resultDiv.innerHTML = '<div class="warning">⚠️ 请选择两个不同的牌号进行对比</div>'; return; }
             const [materialA, gradeA] = valA.split('|');
             const [materialB, gradeB] = valB.split('|');
-            
             let dataA = allMaterialsData[`${materialA}_${gradeA}`];
             let dataB = allMaterialsData[`${materialB}_${gradeB}`];
-            
-            if (!dataA) {
-                dataA = await loadMaterialData(gradeA, materialA);
-                if (dataA) allMaterialsData[`${materialA}_${gradeA}`] = dataA;
-            }
-            if (!dataB) {
-                dataB = await loadMaterialData(gradeB, materialB);
-                if (dataB) allMaterialsData[`${materialB}_${gradeB}`] = dataB;
-            }
-            
-            if (!dataA || !dataB) {
-                resultDiv.innerHTML = '<div class="no-data">数据加载失败，请重试</div>';
-                return;
-            }
-            
+            if (!dataA) { dataA = await loadMaterialData(gradeA, materialA); if (dataA) allMaterialsData[`${materialA}_${gradeA}`] = dataA; }
+            if (!dataB) { dataB = await loadMaterialData(gradeB, materialB); if (dataB) allMaterialsData[`${materialB}_${gradeB}`] = dataB; }
+            if (!dataA || !dataB) { resultDiv.innerHTML = '<div class="no-data">数据加载失败</div>'; return; }
             const props = dataA.technical_specifications.key_properties;
             const propsB = dataB.technical_specifications.key_properties;
-            
-            const formatValue = (val) => {
-                if (val === null || val === undefined || val === '') return '—';
-                return val;
-            };
-            
-            const html = `
-                <div style="margin-bottom: 10px; text-align: right;">
-                    <button onclick="downloadPDF('${gradeA}', '${materialA}')" style="background:#11998e; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">📄 下载 ${gradeA} PDF</button>
-                    <button onclick="downloadPDF('${gradeB}', '${materialB}')" style="background:#11998e; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer; margin-left:10px;">📄 下载 ${gradeB} PDF</button>
+            const format = (v) => v === null || v === undefined ? '—' : v;
+            resultDiv.innerHTML = `
+                <div style="margin-bottom:15px;text-align:right">
+                    <button onclick="downloadPDF('${gradeA}','${materialA}')" style="background:#11998e;color:white;border:none;padding:8px 16px;border-radius:25px;cursor:pointer;">📄 下载 ${gradeA} PDF</button>
+                    <button onclick="downloadPDF('${gradeB}','${materialB}')" style="background:#11998e;color:white;border:none;padding:8px 16px;border-radius:25px;cursor:pointer;margin-left:10px;">📄 下载 ${gradeB} PDF</button>
                 </div>
-                <table>
-                    <tr>
-                        <th>属性</th>
-                        <th>${gradeA} (${materialA})</th>
-                        <th>${gradeB} (${materialB})</th>
-                    </tr>
-                    <tr><td>品牌</td><td>${dataA.metadata.brand || '—'}</td><td>${dataB.metadata.brand || '—'}</td></tr>
-                    <tr><td>基体材料</td><td>${dataA.technical_specifications.base_polymer || '—'}</td><td>${dataB.technical_specifications.base_polymer || '—'}</td></tr>
-                    <tr><td>增强材料</td><td>${dataA.technical_specifications.reinforcement || '—'}</td><td>${dataB.technical_specifications.reinforcement || '—'}</td></tr>
-                    <tr><td>拉伸强度 (MPa)</td><td>${formatValue(props.tensile_strength_mpa)}</td><td>${formatValue(propsB.tensile_strength_mpa)}</td></tr>
-                    <tr><td>弯曲模量 (MPa)</td><td>${formatValue(props.flexural_modulus_mpa)}</td><td>${formatValue(propsB.flexural_modulus_mpa)}</td></tr>
-                    <tr><td>冲击强度 (J/m)</td><td>${formatValue(props.izod_impact_j_m)}</td><td>${formatValue(propsB.izod_impact_j_m)}</td></tr>
-                    <tr><td>热变形温度 (°C)</td><td>${formatValue(props.heat_deflection_temp_c)}</td><td>${formatValue(propsB.heat_deflection_temp_c)}</td></tr>
-                    <tr><td>阻燃等级</td><td>${formatValue(props.ul94_rating)}</td><td>${formatValue(propsB.ul94_rating)}</td></tr>
-                    <tr><td>典型应用</td><td>${dataA.value_proposition?.typical_applications?.join('、') || '—'}</td><td>${dataB.value_proposition?.typical_applications?.join('、') || '—'}</td></tr>
-                    <tr><td>解决痛点</td><td>${dataA.value_proposition?.solved_pain_points?.join('、') || '—'}</td><td>${dataB.value_proposition?.solved_pain_points?.join('、') || '—'}</td></tr>
-                    <tr><td>数据来源</td><td><a href="${dataA.metadata.data_source_url}" target="_blank">查看JSON</a></td><td><a href="${dataB.metadata.data_source_url}" target="_blank">查看JSON</a></td></tr>
+                <table><tr><th>属性</th><th>${gradeA} (${materialA})</th><th>${gradeB} (${materialB})</th></tr>
+                <tr><td>品牌</td><td>${dataA.metadata.brand}</td><td>${dataB.metadata.brand}</td></tr>
+                <tr><td>基体材料</td><td>${dataA.technical_specifications.base_polymer}</td><td>${dataB.technical_specifications.base_polymer}</td></tr>
+                <tr><td>增强材料</td><td>${dataA.technical_specifications.reinforcement}</td><td>${dataB.technical_specifications.reinforcement}</td></tr>
+                <tr><td>拉伸强度 (MPa)</td><td>${format(props.tensile_strength_mpa)}</td><td>${format(propsB.tensile_strength_mpa)}</td></tr>
+                <tr><td>弯曲模量 (MPa)</td><td>${format(props.flexural_modulus_mpa)}</td><td>${format(propsB.flexural_modulus_mpa)}</td></tr>
+                <tr><td>冲击强度 (J/m)</td><td>${format(props.izod_impact_j_m)}</td><td>${format(propsB.izod_impact_j_m)}</td></tr>
+                <tr><td>热变形温度 (°C)</td><td>${format(props.heat_deflection_temp_c)}</td><td>${format(propsB.heat_deflection_temp_c)}</td></tr>
+                <tr><td>阻燃等级</td><td>${format(props.ul94_rating)}</td><td>${format(propsB.ul94_rating)}</td></tr>
+                <tr><td>典型应用</td><td>${dataA.value_proposition?.typical_applications?.join('、') || '—'}</td><td>${dataB.value_proposition?.typical_applications?.join('、') || '—'}</td></tr>
+                <tr><td>解决痛点</td><td>${dataA.value_proposition?.solved_pain_points?.join('、') || '—'}</td><td>${dataB.value_proposition?.solved_pain_points?.join('、') || '—'}</td></tr>
                 </table>
             `;
-            resultDiv.innerHTML = html;
         }
-
+        
         // 搜索功能
         let allSearchMaterials = [];
         async function loadSearchData() {
@@ -364,17 +780,13 @@
                     const data = await res.json();
                     if (Array.isArray(data)) {
                         data.filter(f => f.name.endsWith('.json')).forEach(f => {
-                            allSearchMaterials.push({
-                                name: f.name.replace('.json', ''),
-                                material: m,
-                                url: f.download_url
-                            });
+                            allSearchMaterials.push({ name: f.name.replace('.json', ''), material: m, url: f.download_url });
                         });
                     }
                 } catch(e) {}
             }
         }
-
+        
         function searchGrade() {
             const kw = document.getElementById('searchInput').value.trim().toLowerCase();
             const div = document.getElementById('searchResults');
@@ -383,7 +795,7 @@
             if (results.length === 0) { div.innerHTML = '<div class="result-item">未找到匹配的牌号</div>'; return; }
             div.innerHTML = results.slice(0, 20).map(r => `<div class="result-item"><a href="${r.url}" target="_blank">${r.name}</a> <span style="color:#999">${r.material}</span></div>`).join('');
         }
-
+        
         // 初始化
         loadList('ABS', 'abs-list');
         loadList('POM', 'pom-list');
