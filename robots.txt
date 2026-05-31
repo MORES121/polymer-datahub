@@ -1,0 +1,12 @@
+# 启航塑胶工程塑料数据库 - 爬虫规则
+# 允许所有搜索引擎爬虫访问
+
+User-agent: *
+Allow: /
+
+# 禁止爬虫访问敏感目录
+Disallow: /output_json/
+Disallow: /.git/
+
+# 指定sitemap位置
+Sitemap: https://mores121.github.io/polymer-datahub/sitemap.xml
