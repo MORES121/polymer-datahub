@@ -2,16 +2,31 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>启航塑胶·工程塑料数据库</title>
+    <title>启航塑胶·工程塑料数据库 | 牌号对比</title>
     <style>
-        body { font-family: Arial, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; background: #f5f5f5; }
+        * { box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; max-width: 1400px; margin: 0 auto; padding: 20px; background: #f5f5f5; }
         .header { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
         .contact { background: #11998e; color: white; padding: 15px; border-radius: 10px; margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 15px; }
         .search-box { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
         #searchInput { width: 100%; padding: 12px; font-size: 16px; border: 2px solid #ddd; border-radius: 25px; }
-        .search-results { margin-top: 15px; }
-        .result-item { padding: 8px; border-bottom: 1px solid #eee; }
+        .search-results { margin-top: 15px; max-height: 200px; overflow-y: auto; }
+        .result-item { padding: 8px; border-bottom: 1px solid #eee; cursor: pointer; }
+        .result-item:hover { background: #f0f0f0; }
         .result-item a { color: #667eea; text-decoration: none; }
+        
+        /* 对比区域 */
+        .compare-section { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        .compare-selectors { display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
+        .compare-selector { flex: 1; min-width: 200px; }
+        .compare-selector select { width: 100%; padding: 10px; font-size: 14px; border: 2px solid #ddd; border-radius: 10px; }
+        .compare-table { overflow-x: auto; }
+        .compare-table table { width: 100%; border-collapse: collapse; }
+        .compare-table th, .compare-table td { border: 1px solid #ddd; padding: 10px; text-align: left; vertical-align: top; }
+        .compare-table th { background: #667eea; color: white; text-align: center; }
+        .compare-table td:first-child { background: #f8f9fa; font-weight: bold; width: 150px; }
+        .no-data { text-align: center; color: #999; padding: 40px; }
+        
         .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; }
         .stat-card { background: white; padding: 20px; text-align: center; border-radius: 10px; }
         .stat-number { font-size: 32px; font-weight: bold; color: #667eea; }
@@ -19,12 +34,13 @@
         .card { background: white; padding: 20px; border-radius: 10px; }
         .material-link { display: inline-block; background: #e0e0e0; padding: 5px 10px; margin: 3px; border-radius: 15px; text-decoration: none; color: #333; font-size: 12px; }
         .footer { text-align: center; padding: 20px; color: #666; }
+        @media (max-width: 768px) { .compare-selectors { flex-direction: column; } }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>🏭 启航塑胶 · 工程塑料数据库</h1>
-        <p>官方发布 | 结构化JSON数据 | 74个牌号</p>
+        <p>官方发布 | 结构化JSON数据 | 74个牌号 | 支持牌号对比</p>
     </div>
 
     <div class="contact">
@@ -38,6 +54,28 @@
         <h3>🔍 快速搜索牌号</h3>
         <input type="text" id="searchInput" placeholder="输入牌号，如 ZA02111, M90-44..." onkeyup="searchGrade()">
         <div id="searchResults" class="search-results"></div>
+    </div>
+
+    <!-- 对比区域 -->
+    <div class="compare-section">
+        <h3>📊 牌号性能对比</h3>
+        <div class="compare-selectors">
+            <div class="compare-selector">
+                <label>选择牌号 A：</label>
+                <select id="compareA" onchange="loadCompareData()">
+                    <option value="">-- 请选择牌号 --</option>
+                </select>
+            </div>
+            <div class="compare-selector">
+                <label>选择牌号 B：</label>
+                <select id="compareB" onchange="loadCompareData()">
+                    <option value="">-- 请选择牌号 --</option>
+                </select>
+            </div>
+        </div>
+        <div id="compareResult" class="compare-table">
+            <div class="no-data">请选择两个牌号进行对比</div>
+        </div>
     </div>
 
     <div class="stats">
@@ -60,6 +98,10 @@
     </div>
 
     <script>
+        let allMaterialsData = {};  // 存储所有材料的JSON数据
+        let allMaterialOptions = []; // 存储所有牌号选项
+
+        // 加载材料列表显示
         async function loadList(material, elementId) {
             const url = `https://api.github.com/repos/MORES121/polymer-datahub/contents/data/${material}`;
             try {
@@ -73,17 +115,156 @@
             } catch(e) { document.getElementById(elementId).innerHTML = '加载失败'; }
         }
 
-        let allMaterials = [];
-        async function loadAll() {
-            const mats = ['ABS', 'POM', 'PMMA', 'PC'];
-            for (const m of mats) {
+        // 加载单个牌号的JSON数据
+        async function loadMaterialData(grade, material) {
+            const url = `https://raw.githubusercontent.com/MORES121/polymer-datahub/main/data/${material}/${grade}.json`;
+            try {
+                const res = await fetch(url);
+                if (res.ok) {
+                    const data = await res.json();
+                    return data;
+                }
+            } catch(e) {}
+            return null;
+        }
+
+        // 加载所有牌号用于下拉菜单
+        async function loadAllForCompare() {
+            const materials = ['ABS', 'POM', 'PMMA', 'PC'];
+            for (const m of materials) {
+                const url = `https://api.github.com/repos/MORES121/polymer-datahub/contents/data/${m}`;
+                try {
+                    const res = await fetch(url);
+                    const data = await res.json();
+                    if (Array.isArray(data)) {
+                        for (const file of data.filter(f => f.name.endsWith('.json'))) {
+                            const grade = file.name.replace('.json', '');
+                            allMaterialOptions.push({ grade: grade, material: m });
+                            // 预加载数据
+                            const materialData = await loadMaterialData(grade, m);
+                            if (materialData) {
+                                allMaterialsData[`${m}_${grade}`] = materialData;
+                            }
+                        }
+                    }
+                } catch(e) {}
+            }
+            // 填充下拉菜单
+            populateSelects();
+        }
+
+        // 填充对比下拉菜单
+        function populateSelects() {
+            const selectA = document.getElementById('compareA');
+            const selectB = document.getElementById('compareB');
+            
+            // 按材料分组排序
+            allMaterialOptions.sort((a, b) => {
+                if (a.material !== b.material) return a.material.localeCompare(b.material);
+                return a.grade.localeCompare(b.grade);
+            });
+            
+            const grouped = {};
+            for (const opt of allMaterialOptions) {
+                if (!grouped[opt.material]) grouped[opt.material] = [];
+                grouped[opt.material].push(opt.grade);
+            }
+            
+            for (const select of [selectA, selectB]) {
+                select.innerHTML = '<option value="">-- 请选择牌号 --</option>';
+                for (const [material, grades] of Object.entries(grouped)) {
+                    const group = document.createElement('optgroup');
+                    group.label = material;
+                    for (const grade of grades) {
+                        const option = document.createElement('option');
+                        option.value = `${material}|${grade}`;
+                        option.textContent = grade;
+                        group.appendChild(option);
+                    }
+                    select.appendChild(group);
+                }
+            }
+        }
+
+        // 加载对比数据
+        async function loadCompareData() {
+            const valA = document.getElementById('compareA').value;
+            const valB = document.getElementById('compareB').value;
+            const resultDiv = document.getElementById('compareResult');
+            
+            if (!valA || !valB) {
+                resultDiv.innerHTML = '<div class="no-data">请选择两个牌号进行对比</div>';
+                return;
+            }
+            
+            const [materialA, gradeA] = valA.split('|');
+            const [materialB, gradeB] = valB.split('|');
+            
+            let dataA = allMaterialsData[`${materialA}_${gradeA}`];
+            let dataB = allMaterialsData[`${materialB}_${gradeB}`];
+            
+            if (!dataA) {
+                dataA = await loadMaterialData(gradeA, materialA);
+                if (dataA) allMaterialsData[`${materialA}_${gradeA}`] = dataA;
+            }
+            if (!dataB) {
+                dataB = await loadMaterialData(gradeB, materialB);
+                if (dataB) allMaterialsData[`${materialB}_${gradeB}`] = dataB;
+            }
+            
+            if (!dataA || !dataB) {
+                resultDiv.innerHTML = '<div class="no-data">数据加载失败，请重试</div>';
+                return;
+            }
+            
+            // 生成对比表格
+            const props = dataA.technical_specifications.key_properties;
+            const propsB = dataB.technical_specifications.key_properties;
+            
+            const formatValue = (val) => {
+                if (val === null || val === undefined || val === '') return '—';
+                return val;
+            };
+            
+            const html = `
+                <table>
+                    <tr>
+                        <th>属性</th>
+                        <th>${gradeA} (${materialA})</th>
+                        <th>${gradeB} (${materialB})</th>
+                    </tr>
+                    <tr><td>品牌</td><td>${dataA.metadata.brand || '—'}</td><td>${dataB.metadata.brand || '—'}</td></tr>
+                    <tr><td>基体材料</td><td>${dataA.technical_specifications.base_polymer || '—'}</td><td>${dataB.technical_specifications.base_polymer || '—'}</td></tr>
+                    <tr><td>增强材料</td><td>${dataA.technical_specifications.reinforcement || '—'}</td><td>${dataB.technical_specifications.reinforcement || '—'}</td></tr>
+                    <tr><td>拉伸强度 (MPa)</td><td>${formatValue(props.tensile_strength_mpa)}</td><td>${formatValue(propsB.tensile_strength_mpa)}</td></tr>
+                    <tr><td>弯曲模量 (MPa)</td><td>${formatValue(props.flexural_modulus_mpa)}</td><td>${formatValue(propsB.flexural_modulus_mpa)}</td></tr>
+                    <tr><td>冲击强度 (J/m)</td><td>${formatValue(props.izod_impact_j_m)}</td><td>${formatValue(propsB.izod_impact_j_m)}</td></tr>
+                    <tr><td>热变形温度 (°C)</td><td>${formatValue(props.heat_deflection_temp_c)}</td><td>${formatValue(propsB.heat_deflection_temp_c)}</td></tr>
+                    <tr><td>阻燃等级</td><td>${formatValue(props.ul94_rating)}</td><td>${formatValue(propsB.ul94_rating)}</td></tr>
+                    <tr><td>典型应用</td><td>${dataA.value_proposition?.typical_applications?.join('、') || '—'}</td><td>${dataB.value_proposition?.typical_applications?.join('、') || '—'}</td></tr>
+                    <tr><td>解决痛点</td><td>${dataA.value_proposition?.solved_pain_points?.join('、') || '—'}</td><td>${dataB.value_proposition?.solved_pain_points?.join('、') || '—'}</td></tr>
+                    <tr><td>数据来源</td><td><a href="${dataA.metadata.data_source_url}" target="_blank">查看JSON</a></td><td><a href="${dataB.metadata.data_source_url}" target="_blank">查看JSON</a></td></tr>
+                </table>
+            `;
+            resultDiv.innerHTML = html;
+        }
+
+        // 搜索功能
+        let allSearchMaterials = [];
+        async function loadSearchData() {
+            const materials = ['ABS', 'POM', 'PMMA', 'PC'];
+            for (const m of materials) {
                 const url = `https://api.github.com/repos/MORES121/polymer-datahub/contents/data/${m}`;
                 try {
                     const res = await fetch(url);
                     const data = await res.json();
                     if (Array.isArray(data)) {
                         data.filter(f => f.name.endsWith('.json')).forEach(f => {
-                            allMaterials.push({ name: f.name.replace('.json', ''), material: m, url: f.download_url });
+                            allSearchMaterials.push({
+                                name: f.name.replace('.json', ''),
+                                material: m,
+                                url: f.download_url
+                            });
                         });
                     }
                 } catch(e) {}
@@ -94,16 +275,18 @@
             const kw = document.getElementById('searchInput').value.trim().toLowerCase();
             const div = document.getElementById('searchResults');
             if (kw.length < 2) { div.innerHTML = ''; return; }
-            const results = allMaterials.filter(m => m.name.toLowerCase().includes(kw));
+            const results = allSearchMaterials.filter(m => m.name.toLowerCase().includes(kw));
             if (results.length === 0) { div.innerHTML = '<div class="result-item">未找到匹配的牌号</div>'; return; }
-            div.innerHTML = results.map(r => `<div class="result-item"><a href="${r.url}" target="_blank">${r.name}</a> <span style="color:#999">${r.material}</span></div>`).join('');
+            div.innerHTML = results.slice(0, 20).map(r => `<div class="result-item"><a href="${r.url}" target="_blank">${r.name}</a> <span style="color:#999">${r.material}</span></div>`).join('');
         }
 
+        // 初始化
         loadList('ABS', 'abs-list');
         loadList('POM', 'pom-list');
         loadList('PMMA', 'pmma-list');
         loadList('PC', 'pc-list');
-        loadAll();
+        loadSearchData();
+        loadAllForCompare();
     </script>
 </body>
 </html>
