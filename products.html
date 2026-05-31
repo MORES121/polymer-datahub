@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品中心 | QIHANG PLASTICS | ABS POM PMMA PC</title>
+    <meta name="description" content="启航塑胶产品中心 - ABS树脂、POM聚甲醛、PMMA亚克力、PC聚碳酸酯，74个常备牌号，支持在线查询和PDF下载。">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, #f0f4fc 0%, #e8eef8 100%);
+            color: #1a2a4f;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        
+        /* 导航栏 */
+        .navbar {
+            background: linear-gradient(135deg, #0d47a1 0%, #1565c0 50%, #1976d2 100%);
+            border-radius: 20px;
+            padding: 18px 30px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            box-shadow: 0 10px 30px rgba(13,71,161,0.25);
+        }
+        .logo h1 a { color: white; text-decoration: none; font-size: 26px; }
+        .logo .logo-sub { font-size: 11px; opacity: 0.8; margin-top: 4px; color: white; }
+        .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255,255,255,0.9);
+            font-size: 15px;
+            font-weight: 500;
+            padding: 8px 18px;
+            border-radius: 40px;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active { background: rgba(255,255,255,0.2); color: white; }
+        
+        /* 页面标题 */
+        .page-header {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            margin-bottom: 30px;
+            text-align: center;
+            border: 1px solid #dce5f0;
+        }
+        .page-header h1 { color: #0d47a1; font-size: 36px; margin-bottom: 10px; }
+        .page-header p { color: #5a6e8a; font-size: 16px; }
+        
+        /* 产品网格 */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .product-category {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+        .product-category:hover { transform: translateY(-3px); }
+        .category-header {
+            background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
+            padding: 25px;
+            color: white;
+        }
+        .category-header h2 { font-size: 28px; margin-bottom: 5px; }
+        .category-header .brand { font-size: 13px; opacity: 0.85; }
+        .grade-list { padding: 20px; max-height: 350px; overflow-y: auto; }
+        .material-link {
+            display: inline-block;
+            background: #f0f4f8;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: #1565c0;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .material-link:hover { background: #1565c0; color: white; }
+        
+        /* 联系方式 */
+        .contact-bar {
+            background: white;
+            border-radius: 20px;
+            padding: 20px 30px;
+            margin: 30px 0;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            border: 1px solid #dce5f0;
+        }
+        .contact-item { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #1a2a4f; }
+        .contact-item a { color: #1565c0; text-decoration: none; }
+        
+        .footer { text-align: center; padding: 35px; color: #6a7d9e; font-size: 13px; border-top: 1px solid #dce5f0; }
+        
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; text-align: center; }
+            .products-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <h1><a href="index.html">QIHANG PLASTICS</a></h1>
+                <div class="logo-sub">ENGINEERING PLASTICS SPECIALIST</div>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">首页</a>
+                <a href="products.html" class="active">产品中心</a>
+                <a href="certificates.html">授权证书</a>
+                <a href="index.html#contact">联系我们</a>
+            </div>
+        </div>
+        
+        <div class="page-header">
+            <h1>📦 产品中心</h1>
+            <p>官方授权经销商 · 74+常备库存牌号 · 技术支持</p>
+        </div>
+        
+        <div class="products-grid">
+            <!-- ABS -->
+            <div class="product-category">
+                <div class="category-header">
+                    <h2>🔧 ABS 树脂</h2>
+                    <div class="brand">代理品牌：日本T-UMG、奇美、台化、LG</div>
+                </div>
+                <div class="grade-list" id="abs-list">加载中...</div>
+            </div>
+            
+            <!-- POM -->
+            <div class="product-category">
+                <div class="category-header">
+                    <h2>⚙️ POM 聚甲醛</h2>
+                    <div class="brand">代理品牌：日本大赛路、宝理、杜邦、台塑</div>
+                </div>
+                <div class="grade-list" id="pom-list">加载中...</div>
+            </div>
+            
+            <!-- PMMA -->
+            <div class="product-category">
+                <div class="category-header">
+                    <h2>🔬 PMMA 亚克力</h2>
+                    <div class="brand">代理品牌：奇美、三菱、住友、赢创</div>
+                </div>
+                <div class="grade-list" id="pmma-list">加载中...</div>
+            </div>
+            
+            <!-- PC -->
+            <div class="product-category">
+                <div class="category-header">
+                    <h2>💻 PC 聚碳酸酯</h2>
+                    <div class="brand">代理品牌：科思创、帝人、奇美、SABIC</div>
+                </div>
+                <div class="grade-list" id="pc-list">加载中...</div>
+            </div>
+        </div>
+        
+        <div class="contact-bar">
+            <span class="contact-item">📞 联系人：Shirly</span>
+            <span class="contact-item">📱 电话：18925440603</span>
+            <span class="contact-item">📧 邮箱：13188269@qq.com</span>
+            <span class="contact-item">💬 微信：18925440603</span>
+        </div>
+        
+        <div class="footer">
+            <p>© 2026 QIHANG PLASTICS · 东莞市启航塑胶有限公司</p>
+            <p>让数据说话，让AI服务 | 数据最后更新：2026-05-31</p>
+        </div>
+    </div>
+    
+    <script>
+        async function loadList(material, elementId) {
+            const url = `https://api.github.com/repos/MORES121/polymer-datahub/contents/data/${material}`;
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
+                if (Array.isArray(data)) {
+                    const html = data.filter(f => f.name.endsWith('.json'))
+                        .map(f => `<a href="${f.download_url}" class="material-link" target="_blank">${f.name.replace('.json', '')}</a>`)
+                        .join('');
+                    document.getElementById(elementId).innerHTML = html || '暂无数据';
+                }
+            } catch(e) { document.getElementById(elementId).innerHTML = '加载失败'; }
+        }
+        
+        loadList('ABS', 'abs-list');
+        loadList('POM', 'pom-list');
+        loadList('PMMA', 'pmma-list');
+        loadList('PC', 'pc-list');
+    </script>
+</body>
+</html>

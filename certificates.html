@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>授权证书 | QIHANG PLASTICS | 官方授权经销商</title>
+    <meta name="description" content="启航塑胶官方授权证书 - 德国恩信格、日本大赛路、日本T-UMG 三大品牌授权经销商，证书真实有效。">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, #f0f4fc 0%, #e8eef8 100%);
+            color: #1a2a4f;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        
+        /* 导航栏 */
+        .navbar {
+            background: linear-gradient(135deg, #0d47a1 0%, #1565c0 50%, #1976d2 100%);
+            border-radius: 20px;
+            padding: 18px 30px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            box-shadow: 0 10px 30px rgba(13,71,161,0.25);
+        }
+        .logo h1 a { color: white; text-decoration: none; font-size: 26px; }
+        .logo .logo-sub { font-size: 11px; opacity: 0.8; margin-top: 4px; color: white; }
+        .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255,255,255,0.9);
+            font-size: 15px;
+            font-weight: 500;
+            padding: 8px 18px;
+            border-radius: 40px;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active { background: rgba(255,255,255,0.2); color: white; }
+        
+        /* 页面标题 */
+        .page-header {
+            background: white;
+            border-radius: 24px;
+            padding: 35px;
+            margin-bottom: 30px;
+            text-align: center;
+            border: 1px solid #dce5f0;
+        }
+        .page-header h1 { color: #0d47a1; font-size: 36px; margin-bottom: 10px; }
+        .page-header p { color: #5a6e8a; font-size: 16px; }
+        
+        /* 证书网格 */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .cert-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .cert-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        .cert-header {
+            background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
+            padding: 25px;
+            text-align: center;
+            color: white;
+        }
+        .cert-header .flag { font-size: 48px; margin-bottom: 10px; }
+        .cert-header h2 { font-size: 22px; margin-bottom: 5px; }
+        .cert-header .brand-en { font-size: 13px; opacity: 0.85; }
+        .cert-body {
+            padding: 25px;
+            text-align: center;
+        }
+        .cert-body .company { font-weight: 600; color: #0d47a1; margin-bottom: 15px; }
+        .cert-body .validity { font-size: 13px; color: #5a6e8a; margin-bottom: 20px; }
+        .cert-view-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .cert-view-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(13,71,161,0.3);
+        }
+        
+        /* 证书说明 */
+        .cert-note {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdef5 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        .cert-note h3 { color: #0d47a1; margin-bottom: 15px; }
+        .cert-note p { color: #1a2a4f; line-height: 1.7; }
+        
+        /* 联系方式 */
+        .contact-bar {
+            background: white;
+            border-radius: 20px;
+            padding: 20px 30px;
+            margin: 30px 0;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            border: 1px solid #dce5f0;
+        }
+        .contact-item { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #1a2a4f; }
+        .contact-item a { color: #1565c0; text-decoration: none; }
+        
+        .footer { text-align: center; padding: 35px; color: #6a7d9e; font-size: 13px; border-top: 1px solid #dce5f0; }
+        
+        @media (max-width: 1024px) {
+            .cert-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; text-align: center; }
+            .cert-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <h1><a href="index.html">QIHANG PLASTICS</a></h1>
+                <div class="logo-sub">ENGINEERING PLASTICS SPECIALIST</div>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">首页</a>
+                <a href="products.html">产品中心</a>
+                <a href="certificates.html" class="active">授权证书</a>
+                <a href="index.html#contact">联系我们</a>
+            </div>
+        </div>
+        
+        <div class="page-header">
+            <h1>🏅 官方授权经销商证书</h1>
+            <p>启航塑胶为以下品牌官方授权经销商 · 证书真实有效 · 十年信誉保障</p>
+        </div>
+        
+        <div class="cert-grid">
+            <!-- 德国恩信格 -->
+            <div class="cert-card">
+                <div class="cert-header">
+                    <div class="flag">🇩🇪</div>
+                    <h2>德国恩信格</h2>
+                    <div class="brand-en">Ensinger</div>
+                </div>
+                <div class="cert-body">
+                    <div class="company">东莞市启航塑胶有限公司</div>
+                    <div class="validity">✅ 授权期限：长期有效</div>
+                    <a href="./certificates/certificate-ensinger.jpg" target="_blank" class="cert-view-btn">查看完整证书 →</a>
+                </div>
+            </div>
+            
+            <!-- 日本大赛路 -->
+            <div class="cert-card">
+                <div class="cert-header">
+                    <div class="flag">🇯🇵</div>
+                    <h2>日本大赛路</h2>
+                    <div class="brand-en">Daisel</div>
+                </div>
+                <div class="cert-body">
+                    <div class="company">东莞市启航塑胶有限公司</div>
+                    <div class="validity">✅ 授权期限：2025.01 - 2035.01</div>
+                    <a href="./certificates/certificate-daisel.jpg" target="_blank" class="cert-view-btn">查看完整证书 →</a>
+                </div>
+            </div>
+            
+            <!-- 日本T-UMG -->
+            <div class="cert-card">
+                <div class="cert-header">
+                    <div class="flag">🇯🇵</div>
+                    <h2>日本T-UMG</h2>
+                    <div class="brand-en">A&L Shanghai</div>
+                </div>
+                <div class="cert-body">
+                    <div class="company">东莞市启航塑胶有限公司</div>
+                    <div class="validity">✅ 授权期限：持续有效</div>
+                    <a href="./certificates/certificate-umg.jpg" target="_blank" class="cert-view-btn">查看完整证书 →</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cert-note">
+            <h3>📜 关于授权证书</h3>
+            <p>启航塑胶与德国恩信格、日本大赛路、日本T-UMG等全球知名工程塑料制造商建立了长期稳定的合作关系，<br>以上授权证书均为官方颁发，真实有效，可随时查验。公司坚持"品质第一，客户至上"的经营理念，<br>为客户提供原厂正品保障和专业的技术支持服务。</p>
+        </div>
+        
+        <div class="contact-bar">
+            <span class="contact-item">📞 联系人：Shirly</span>
+            <span class="contact-item">📱 电话：18925440603</span>
+            <span class="contact-item">📧 邮箱：13188269@qq.com</span>
+            <span class="contact-item">💬 微信：18925440603</span>
+        </div>
+        
+        <div class="footer">
+            <p>© 2026 QIHANG PLASTICS · 东莞市启航塑胶有限公司</p>
+            <p>让数据说话，让AI服务 | 三大品牌官方授权 | 证书可查验</p>
+        </div>
+    </div>
+</body>
+</html>
